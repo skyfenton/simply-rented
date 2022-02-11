@@ -40,7 +40,7 @@ export default function App() {
               )
             }
           />
-          <Route path="/user" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Route>
       </Routes>

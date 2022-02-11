@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import logo from "../assets/logo.png";
 import axios from 'axios';
+import {useNavigate,} from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 async function loginUser(credentials) {
@@ -15,9 +16,10 @@ async function loginUser(credentials) {
   }
 }
 
-export default function Login({ setToken }) {
+export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -27,7 +29,8 @@ export default function Login({ setToken }) {
       password
     });
     if(token && token.status === 200){
-      setToken(token);
+      props.setToken(token);
+      navigate("/profile");
     }
   }
   
