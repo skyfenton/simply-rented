@@ -13,9 +13,13 @@ app.get('/', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  res.send({
-    token: 'test123'
-  });
+  if(req.query){
+    res.send({
+      token: 'test123'
+    });
+  }else{
+    res.status(400).end();
+  }
 })
 
 // make app listen to requests at port number
