@@ -1,38 +1,44 @@
 import React, { useState } from "react";
 import "./Login.css";
 import logo from "../assets/logo.png";
-import axios from 'axios';
-import {useNavigate,} from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 async function loginUser(credentials) {
-  try{
-    const response = await axios.post('http://localhost:5000/login', credentials);
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/login",
+      credentials
+    );
     return response;
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
     return false;
   }
 }
 
 export default function Login(props) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [invalid, showInvalid] = useState("");
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
+    showInvalid(false);
     e.preventDefault();
     const token = await loginUser({
       email,
-      password
+      password,
     });
-    if(token && token.status === 200){
+    if (token && token.status === 200) {
       props.setToken(token);
       navigate("/profile");
+    }else{
+      showInvalid(true);
     }
-  }
-  
+  };
+
   return (
     <div class="text-center">
       <main class="form-signin">
@@ -48,6 +54,7 @@ export default function Login(props) {
               placeholder="name@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <label for="floatingInput">Email address</label>
           </div>
@@ -63,15 +70,23 @@ export default function Login(props) {
             <label for="floatingPassword">Password</label>
           </div>
 
-          <div class="checkbox mb-3">
+          <div class="checkbox mb-3" hidden>
             <label>
               <input type="checkbox" value="remember-me" /> Remember me
             </label>
           </div>
+          {invalid ? (
+            <div style={{color: "red"}} class="mb-3">
+              <i class="bi bi-exclamation-triangle-fill"> </i>
+              Email or password incorrect
+            </div>
+          ) : null}
           <button class="w-100 btn btn-lg btn-primary" type="submit">
             Sign in
           </button>
-          {/* <p class="mt-5 mb-3 text-muted">© 2017–2021</p> */}
+          <p class="mt-5 mb-3 text-muted" hidden>
+            © 2017–2021
+          </p>
         </form>
       </main>
     </div>
