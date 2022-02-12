@@ -12,11 +12,11 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 
-let token = null;
+let user = null;
 
-function setToken(userToken) {
+function setUser(email) {
   // sessionStorage.setItem('token', JSON.stringify(userToken));
-  token = userToken;
+  user = email;
 }
 
 function getToken() {
@@ -34,8 +34,8 @@ export default function App() {
           <Route
             path="/login"
             element={
-              !token ? (
-                <Login setToken={setToken} />
+              !user ? (
+                <Login setUser={setUser} />
               ) : (
                 <Navigate replace to="/user" />
               )

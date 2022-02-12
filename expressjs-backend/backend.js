@@ -12,12 +12,11 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+// Verify login info with backend (right now just sends 200 if fields exist)
 app.post('/login', (req, res) => {
   let body = req.body;
   if(body.email && body.password){
-    res.send({
-      token: 'test123'
-    });
+    res.end();
   }else{
     res.status(400).end();
   }

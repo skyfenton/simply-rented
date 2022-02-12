@@ -27,12 +27,12 @@ export default function Login(props) {
   const handleSubmit = async (e) => {
     showInvalid(false);
     e.preventDefault();
-    const token = await loginUser({
+    const response = await loginUser({
       email,
       password,
     });
-    if (token && token.status === 200) {
-      props.setToken(token);
+    if (response && response.status === 200) {
+      props.setUser(email);
       navigate("/profile");
     }else{
       showInvalid(true);
