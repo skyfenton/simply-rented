@@ -23,7 +23,6 @@ export default function Login(props) {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log(email, password);
     const token = await loginUser({
       email,
       password

@@ -13,7 +13,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  if(req.query){
+  let body = req.body;
+  if(body.email && body.password){
     res.send({
       token: 'test123'
     });
