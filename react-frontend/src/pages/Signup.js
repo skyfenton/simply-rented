@@ -130,7 +130,7 @@ export function Signup(props) {
         <main class="form-signup">
           <form data-bitwarden-watching="1" onSubmit={handleSubmit}>
             <img class="mb-4" src={logo} alt="" width="176" height="169" />
-            <h1 class="h3 mb-3 fw-normal">Welcome back!</h1>
+            <h1 class="h3 mb-3 fw-normal">Create an Account!</h1>
   
             <div class="form-floating">
               <input
@@ -192,7 +192,7 @@ export function Signup(props) {
             </div>
   
             <button class="w-100 btn btn-lg btn-primary" type="submit">
-              Sign in
+              Sign Up
             </button>
             <p class="mt-5 mb-3 text-muted" hidden>
               © 2017–2021
