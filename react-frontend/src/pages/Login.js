@@ -34,7 +34,7 @@ export default function Login(props) {
     if (response && response.status === 200) {
       props.setUser(email);
       navigate("/profile");
-    }else{
+    } else {
       showInvalid(true);
     }
   };
@@ -76,7 +76,7 @@ export default function Login(props) {
             </label>
           </div>
           {invalid ? (
-            <div style={{color: "red"}} class="mb-3">
+            <div style={{ color: "red" }} class="mb-3">
               <i class="bi bi-exclamation-triangle-fill"> </i>
               Email or password incorrect
             </div>
