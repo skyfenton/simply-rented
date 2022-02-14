@@ -3,15 +3,10 @@ const cors = require("cors");
 const app = express(); //make express instance
 const port = 5000; //constant to listen on port 5000
 
-const users = { 
-	users_list :
-	[]
-}
-
 app.use(express.json()); //process in json format
 app.use(cors());
 
-// temportary hard-coded values for user login attempts, will link to db when set up
+// temporary hard-coded values for user login attempts, will link to db when set up
 const users = {
   users_list: [
     {
@@ -37,8 +32,7 @@ const users = {
   ],
 };
 
-=======
-// from Develop
+
 // For sending users to database
 // var mongoose = require("mongoose");
 // mongoose.Promise = global.Promise;mongoose.connect("mongodb://localhost:27017/simply-rented");
