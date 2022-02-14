@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Signup.css";
 import logo from "../assets/boxlogo.png";
 import axios from "axios";
@@ -19,6 +19,14 @@ async function createUser(credentials) {
 
 export function Signup(props) {
   const navigate = useNavigate();
+
+  // redirect to profile if logged in
+  useEffect(() => {
+    if(props.getUser()){
+      navigate("/profile");
+    }
+  });
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");

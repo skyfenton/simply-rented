@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import logo from "../assets/boxlogo.png";
 import axios from "axios";
-import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
