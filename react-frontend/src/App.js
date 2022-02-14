@@ -15,20 +15,20 @@ function setUser(email) {
   sessionStorage.setItem("user", JSON.stringify(email));
 }
 
-function removeUser() {
-  if(getUser()){
-    console.log("removing user");
-    sessionStorage.removeItem("user");
-    return true;
-  }
-  console.log("user does not exist");
-  return false;
-}
-
 function getUser() {
   const userJson = sessionStorage.getItem("user");
   const userData = JSON.parse(userJson);
   return userData;
+}
+
+function removeUser() {
+  if (getUser()) {
+    console.log("removing user from session");
+    sessionStorage.removeItem("user");
+    return true;
+  }
+  console.log("session user does not exist");
+  return false;
 }
 
 export default function App() {
