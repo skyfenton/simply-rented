@@ -8,30 +8,10 @@ app.use(express.json()); // process in json format
 app.use(cors());
 
 // temporary hard-coded values for user login attempts, will link to db when set up
-const users = {
-  users_list: [
-    {
-      email: "jxmurill@calpoly.edu",
-      password: "test0",
-    },
-    {
-      email: "test1@test.com",
-      password: "tester1",
-    },
-    {
-      email: "test2@test.com",
-      password: "tester2",
-    },
-    {
-      email: "test3@test.com",
-      password: "test3",
-    },
-    {
-      email: "simplyrented@gmail.com",
-      password: "test4",
-    },
-  ],
-};
+const users = new Map();
+users.set("jxmurill@calpoly.edu", { password: "test0" });
+users.set("test@test.com", { password: "tester1" });
+users.set("simplyrented@gmail.com", { password: "test4" });
 
 // For sending users to database
 // var mongoose = require("mongoose");
@@ -68,19 +48,18 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-function findUserByEmailAndPw(email, password) {
-  return users.users_list.filter(
-    (user) => user.email === email && user.password === password
-  );
+function verifyUser(email, password) {
+  if (users.has(email)) {
+    return users.get(email).password === password;
+  }
+  return false;
 }
 
 // Verify login info with backend (right now just sends 200 if fields exist)
 app.post("/login", (req, res) => {
   const { body } = req;
-  if (body.email && body.password) {
-    const result = findUserByEmailAndPw(body.email, body.password);
-    if (result === undefined || result.length === 0) res.status(400).end();
-    else res.status(200).end();
+  if (body.email && body.password && verifyUser(body.email, body.password)) {
+    res.status(200).end();
   } else {
     res.status(400).end();
   }
@@ -91,7 +70,12 @@ app.get("/users", (req, res) => {
 });
 
 function addUser(user) {
-  users.users_list.push(user);
+  try {
+    users[user.email] = { password: user.password };
+    return true;
+  } catch (error) {
+    return false;
+  }
 }
 
 app.post("/signup", (req, res) => {
