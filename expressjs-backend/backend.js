@@ -71,7 +71,8 @@ app.get("/users", (req, res) => {
 
 function addUser(user) {
   try {
-    users[user.email] = { password: user.password };
+    users.set(user.email, { password: user.password });
+    console.log("user added", user);
     return true;
   } catch (error) {
     return false;
@@ -80,8 +81,10 @@ function addUser(user) {
 
 app.post("/signup", (req, res) => {
   const userToAdd = req.body;
-  addUser(userToAdd);
-  res.status(201).send(userToAdd);
+  if (users.has(userToAdd.email)) {
+    res.status(200).send("email exists");
+  } else if (addUser(userToAdd)) res.status(201).end();
+  else res.status(400).end();
 });
 
 // make app listen to requests at port number

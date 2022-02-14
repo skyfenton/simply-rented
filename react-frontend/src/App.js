@@ -99,13 +99,10 @@ function NavBar() {
             <Link
               to="/signup"
               role="button"
-              className="btn btn-outline-primary me-2"
+              className="btn btn-primary"
             >
               Sign Up
             </Link>
-            <button type="button" className="btn btn-primary" hidden>
-              Sign-up
-            </button>
           </div>
         </header>
       </div>
