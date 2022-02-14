@@ -1,9 +1,10 @@
-const express = require("express"); //import express
+const express = require("express"); // import express
 const cors = require("cors");
-const app = express(); //make express instance
-const port = 5000; //constant to listen on port 5000
 
-app.use(express.json()); //process in json format
+const app = express(); // make express instance
+const port = 5000; // constant to listen on port 5000
+
+app.use(express.json()); // process in json format
 app.use(cors());
 
 // temporary hard-coded values for user login attempts, will link to db when set up
@@ -31,7 +32,6 @@ const users = {
     },
   ],
 };
-
 
 // For sending users to database
 // var mongoose = require("mongoose");
@@ -62,46 +62,46 @@ const users = {
 //  });
 // });
 
-
 // setup get API endpoint to match url pattern '/' (root) and two json objects:
 // req for incoming, res for outgoing response
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+function findUserByEmailAndPw(email, password) {
+  return users.users_list.filter(
+    (user) => user.email === email && user.password === password
+  );
+}
+
 // Verify login info with backend (right now just sends 200 if fields exist)
 app.post("/login", (req, res) => {
-  let body = req.body;
+  const { body } = req;
   if (body.email && body.password) {
-    let result = findUserByEmailAndPw(body.email, body.password);
-    if (result === undefined || result.length == 0) res.status(400).end();
+    const result = findUserByEmailAndPw(body.email, body.password);
+    if (result === undefined || result.length === 0) res.status(400).end();
     else res.status(200).end();
   } else {
     res.status(400).end();
   }
 });
 
-function findUserByEmailAndPw(email, password) {
-  return users["users_list"].filter(
-    (user) => user["email"] === email && user["password"] === password
-  );
-}
-
-app.get('/users', (req, res) => {
-	 res.send(users);
+app.get("/users", (req, res) => {
+  res.send(users);
 });
 
-app.post('/signup', (req, res) => {
+function addUser(user) {
+  users.users_list.push(user);
+}
+
+app.post("/signup", (req, res) => {
   const userToAdd = req.body;
   addUser(userToAdd);
   res.status(201).send(userToAdd);
 });
 
-function addUser(user){
-  users['users_list'].push(user);
-}
-
 // make app listen to requests at port number
 app.listen(port, () => {
+  // eslint-disable-next-line no-console
   console.log(`Example app listening at http://localhost:${port}`);
 });
