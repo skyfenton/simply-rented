@@ -96,6 +96,13 @@ function NavBar() {
             >
               Login
             </Link>
+            <Link
+              to="/signup"
+              role="button"
+              className="btn btn-outline-primary me-2"
+            >
+              Sign Up
+            </Link>
             <button type="button" className="btn btn-primary" hidden>
               Sign-up
             </button>
