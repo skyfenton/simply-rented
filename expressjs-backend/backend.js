@@ -3,6 +3,8 @@ const cors = require("cors");
 
 const userServices = require('./models/user-services');
 
+const app = express();
+const port = 5000; 
 
 app.use(express.json()); // process in json format
 app.use(cors());
@@ -13,11 +15,12 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-function verifyUser(email, password) {
-  if (users.has(email)) {
-    return users.get(email).password === password;
-  }
-  return false;
+function verifyUser(email, password) {                // Need to update further as this isn't checking password
+  const user = userServices.getUsers(email);
+  if (user)
+    return true;
+  else
+    return false;
 }
 
 // Verify login info with backend (right now just sends 200 if fields exist)
