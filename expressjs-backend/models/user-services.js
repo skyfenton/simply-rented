@@ -1,24 +1,28 @@
 const mongoose = require('mongoose');
 const UserModel = require('./user');
+const dotenv = require("dotenv");
 
-mongoose.connect(
-  'mongodb://localhost:27017/users',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-).catch((error) => console.log(error));
+dotenv.config();
 
-async function findUserByName(name) {
-  return UserModel.find({ name });
+
+var uri = "mongodb://ZachLofquist:kutpu1-jovbab-nucwIq@Cluster0-shard-00-00.z7xan.mongodb.net:27017,cluster0-shard-00-01.z7xan.mongodb.net:27017,cluster0-shard-00-02.z7xan.mongodb.net:27017/users?ssl=true&replicaSet=atlas-141dkl-shard-0&authSource=admin&retryWrites=true&w=majority";
+
+mongoose.connect(uri).catch((error) => console.log(error));
+
+async function findUserByName(firstName) {
+  return UserModel.find({ firstName });
 }
 
-async function getUsers(name) {
+async function findUserByEmail(email) {   
+  return UserModel.find({ email });
+}
+
+async function getUsers(email) {      // Look at example of job and name to check for both so can get users by any field
   let result;
-  if (name === undefined) {
+  if (email === undefined) {
     result = await UserModel.find();
-  } else if (name) {
-    result = await findUserByName(name);
+  } else if (email) {
+    result = await findUserByName(email);
   }
   return result;
 }
