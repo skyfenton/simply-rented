@@ -1,7 +1,10 @@
+
+
 const express = require("express"); // import express
 const cors = require("cors");
 
 const userServices = require('./models/user-services');
+const itemServices = require('./models/item-services');
 
 const app = express();
 const port = 5000; 
@@ -23,7 +26,6 @@ function verifyUser(email, password) {                // Need to update further 
     return false;
 }
 
-// Verify login info with backend (right now just sends 200 if fields exist)
 app.post("/login", (req, res) => {
   const { body } = req;
   if (body.email && body.password && verifyUser(body.email, body.password)) {
@@ -32,7 +34,6 @@ app.post("/login", (req, res) => {
     res.status(400).end();
   }
 })
-
 
 app.get('/users', async (req, res) => {
   const name = req.query['firstName'];
@@ -45,6 +46,37 @@ app.get('/users', async (req, res) => {
   }
 });
 
+app.get('/items', async (req, res) => {
+  const item_name = req.query['item_name'];
+  try {
+      const result = await itemServices.getItems(item_name);
+      res.send({item_list: result});         
+  } catch (error) {
+      console.log(error);
+      res.status(500).send('An error ocurred in the server.');
+  }
+});
+
+app.get('/searchItems', async (req, res) => {
+  const query = req.query['query'];
+  try {
+      console.log(query);
+      let result = await itemServices.getItems();
+      result = applySearch(result, query);
+      console.log(result)
+      res.send({item_list: result});         
+  } catch (error) {
+      console.log(error);
+      res.status(500).send('An error ocurred in the server.');
+  }
+});
+
+function applySearch(item_list, name){
+  if (name == undefined){
+    return item_list
+  }
+  return item_list.filter(({item}) => item.includes(name));
+}
 
 app.post('/signup', (req, res) => {
   const userToAdd = req.body;
