@@ -54,3 +54,6 @@ app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening at http://localhost:${port}`);
 });
+
+
+val = "NOTHING"
