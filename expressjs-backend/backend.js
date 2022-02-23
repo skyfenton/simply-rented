@@ -6,7 +6,7 @@ const userServices = require("./models/user-services");
 const app = express();
 const port = 5000;
 
-app.set("port", process.env.PORT || port)
+app.set("port", process.env.PORT || port);
 
 app.use(express.json()); // process in json format
 app.use(cors());
