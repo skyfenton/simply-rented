@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const ItemModel = require('./item');
+const mongoose = require("mongoose");
+const ItemModel = require("./item");
 
 async function addItem(item) {
   try {
@@ -13,11 +13,11 @@ async function addItem(item) {
 }
 
 async function findItemByName(item) {
-  return ItemModel.find({item});
+  return ItemModel.find({ item });
 }
 
-async function findSearch(name){
-  return ItemModel.find
+async function findSearch(name) {
+  return ItemModel.find;
 }
 
 async function findItemByIDAndDelete(id) {
