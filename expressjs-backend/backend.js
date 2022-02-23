@@ -9,6 +9,10 @@ const port = 5000;
 app.use(express.json()); // process in json format
 app.use(cors());
 
+app.listen(process.env.PORT || port, () => {
+  console.log("REST API is listening.");
+});
+
 // setup get API endpoint to match url pattern '/' (root) and two json objects:
 // req for incoming, res for outgoing response
 app.get("/", (req, res) => {
@@ -54,7 +58,3 @@ app.post("/signup", (req, res) => {
 //   // eslint-disable-next-line no-console
 //   console.log(`Example app listening at http://localhost:${port}`);
 // });
-
-app.listen(process.env.PORT || port, () => {
-  console.log("REST API is listening.");
-});
