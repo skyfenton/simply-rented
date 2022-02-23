@@ -1,5 +1,3 @@
-
-
 const express = require("express"); // import express
 const cors = require("cors");
 
@@ -60,10 +58,8 @@ app.get('/items', async (req, res) => {
 app.get('/searchItems', async (req, res) => {
   const query = req.query['query'];
   try {
-      console.log(query);
       let result = await itemServices.getItems();
       result = applySearch(result, query);
-      console.log(result)
       res.send({item_list: result});         
   } catch (error) {
       console.log(error);

@@ -1,14 +1,6 @@
 const mongoose = require('mongoose');
 const ItemModel = require('./item');
 
-// mongoose.connect(
-//   'mongodb://localhost:27017/items',
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   },
-// ).catch((error) => console.log(error));
-
 async function addItem(item) {
   try {
     const itemToAdd = new ItemModel(item);
