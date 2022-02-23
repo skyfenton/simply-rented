@@ -31,6 +31,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: "expressjs-backend/package-lock.json"
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
@@ -39,3 +40,4 @@ jobs:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "simply-rented"
         heroku_email: "zlofquis@calpoly.edu"
+        appdir: "expressjs-backend"
