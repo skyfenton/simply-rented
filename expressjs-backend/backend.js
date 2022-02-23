@@ -56,4 +56,4 @@ app.listen(port, () => {
 });
 
 
-val = "NOTHING"
+val = "Something"
