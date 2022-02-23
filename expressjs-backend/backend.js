@@ -50,9 +50,11 @@ app.post("/signup", (req, res) => {
 });
 
 // make app listen to requests at port number
-app.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   // eslint-disable-next-line no-console
+//   console.log(`Example app listening at http://localhost:${port}`);
+// });
 
-val = "Something";
+app.listen(process.env.PORT || port, () => {
+  console.log("REST API is listening.");
+});
