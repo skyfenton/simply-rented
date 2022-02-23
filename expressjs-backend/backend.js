@@ -29,7 +29,8 @@ app.post("/login", (req, res) => {
     res.status(200).end();
   } else {
     res.status(400).end();
-  }});
+  }
+});
 
 app.get("/users", async (req, res) => {
   const name = req.query.firstName;
