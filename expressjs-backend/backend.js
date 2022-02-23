@@ -2,6 +2,7 @@ const express = require("express"); // import express
 const cors = require("cors");
 
 const userServices = require('./models/user-services');
+const itemServices = require('./models/item-services');
 
 const app = express();
 const port = 5000; 
@@ -39,6 +40,17 @@ app.get('/users', async (req, res) => {
   try {
       const result = await userServices.getUsers(name);
       res.send({users_list: result});         
+  } catch (error) {
+      console.log(error);
+      res.status(500).send('An error ocurred in the server.');
+  }
+});
+
+app.get('/items', async (req, res) => {
+  const name = req.query['itemName'];
+  try {
+      const result = await itemServices.getItems(name);
+      res.send({items_list: result});         
   } catch (error) {
       console.log(error);
       res.status(500).send('An error ocurred in the server.');
