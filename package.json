@@ -9,5 +9,22 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^2.5.1"
-  }
+  },
+  "name": "simply-rented",
+  "description": "Web app for renting items you don't use every day. Created by Herculease.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/herculease/simply-rented.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/herculease/simply-rented/issues"
+  },
+  "homepage": "https://github.com/herculease/simply-rented#readme"
 }

@@ -1,13 +1,6 @@
 const mongoose = require("mongoose");
 const ItemModel = require("./item");
 
-mongoose
-  .connect("mongodb://localhost:27017/items", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .catch((error) => console.log(error));
-
 async function addItem(item) {
   try {
     const itemToAdd = new ItemModel(item);
@@ -20,7 +13,11 @@ async function addItem(item) {
 }
 
 async function findItemByName(item) {
-  return ItemModel.find({ item });
+  return ItemModel.find({item});
+}
+
+async function findSearch(name){
+  return ItemModel.find
 }
 
 async function findItemByIDAndDelete(id) {
