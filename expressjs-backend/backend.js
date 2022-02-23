@@ -1,10 +1,8 @@
-
-
 const express = require("express"); // import express
 const cors = require("cors");
 
-const userServices = require('./models/user-services');
-const itemServices = require('./models/item-services');
+const userServices = require("./models/user-services");
+const itemServices = require("./models/item-services");
 
 const app = express();
 const port = 5000;
@@ -44,45 +42,49 @@ app.get("/users", async (req, res) => {
   }
 });
 
-app.get('/items', async (req, res) => {
-  const item_name = req.query['item_name'];
+app.get("/items", async (req, res) => {
+  const item_name = req.query["item_name"];
   try {
-      const result = await itemServices.getItems(item_name);
-      res.send({item_list: result});         
+    const result = await itemServices.getItems(item_name);
+    res.send({ item_list: result });
   } catch (error) {
-      console.log(error);
-      res.status(500).send('An error ocurred in the server.');
+    console.log(error);
+    res.status(500).send("An error ocurred in the server.");
   }
 });
 
-app.get('/searchItems', async (req, res) => {
-  const query = req.query['query'];
+app.get("/searchItems", async (req, res) => {
+  const query = req.query["query"];
   try {
-      console.log(query);
-      let result = await itemServices.getItems();
-      result = applySearch(result, query);
-      console.log(result)
-      res.send({item_list: result});         
+    let result = await itemServices.getItems();
+    result = applySearch(result, query);
+    res.send({ item_list: result });
   } catch (error) {
-      console.log(error);
-      res.status(500).send('An error ocurred in the server.');
+    console.log(error);
+    res.status(500).send("An error ocurred in the server.");
   }
 });
 
-function applySearch(item_list, name){
-  if (name == undefined){
-    return item_list
+function applySearch(item_list, name) {
+  if (name == undefined) {
+    return item_list;
   }
-  return item_list.filter(({item}) => item.includes(name));
+  return item_list.filter(({ item }) => item.includes(name));
 }
 
-app.post('/signup', (req, res) => {
+app.post("/signup", (req, res) => {
   const userToAdd = req.body;
   const savedUser = userServices.addUser(userToAdd);
-  if (savedUser)
-    res.status(201).send(savedUser);
-  else
-    res.status(500).end();
+  if (savedUser) res.status(201).send(savedUser);
+  else res.status(500).end();
+});
+
+app.post("/signup", (req, res) => {
+  const userToAdd = req.body;
+  if (users.has(userToAdd.email)) {
+    res.status(200).send("email exists");
+  } else if (addUser(userToAdd)) res.status(201).end();
+  else res.status(400).end();
 });
 
 // make app listen to requests at port number

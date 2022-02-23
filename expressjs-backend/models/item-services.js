@@ -13,11 +13,11 @@ async function addItem(item) {
 }
 
 async function findItemByName(item) {
-  return ItemModel.find({item});
+  return ItemModel.find({ item });
 }
 
-async function findSearch(name){
-  return ItemModel.find
+async function findSearch(name) {
+  return ItemModel.find;
 }
 
 async function findItemByIDAndDelete(id) {
