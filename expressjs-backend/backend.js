@@ -58,5 +58,3 @@ app.post("/signup", (req, res) => {
 app.listen(process.env.PORT || port, () => {
   console.log("REST API is listening.");
 });
-
-// Test Comment
