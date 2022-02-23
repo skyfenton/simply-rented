@@ -39,4 +39,3 @@ jobs:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "simply-rented"
         heroku_email: "zlofquis@calpoly.edu"
-        appdir: "expressjs-backend"
