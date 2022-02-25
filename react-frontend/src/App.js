@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
+import List from "./pages/List";
 
 function setUser(email) {
   sessionStorage.setItem("user", JSON.stringify(email));
@@ -47,6 +48,7 @@ export default function App() {
             element={<Profile getUser={getUser} removeUser={removeUser} />}
           />
           <Route path="/signup" element = {<Signup getUser={getUser}/>} />
+          <Route path="/list" element = {<List />}/>
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Route>
       </Routes>
