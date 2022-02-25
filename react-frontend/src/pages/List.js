@@ -1,39 +1,39 @@
-import Card from "./Card";
+import ItemCard from "./ItemCard";
 
 export default function List(props){
   return(
   <div class="container-lg">
-    <div class="row justify-content-evenly gx-5">
-      <Card title="1"/>
-      <Card title="2"/>
-      <Card title="3"/>
-      <Card title="4"/>
-      <Card title="5"/>
-      <Card title="1"/>
-      <Card title="2"/>
-      <Card title="3"/>
-      <Card title="4"/>
-      <Card title="5"/>
-      <Card title="1"/>
-      <Card title="2"/>
-      <Card title="3"/>
-      <Card title="4"/>
-      <Card title="5"/>
-      <Card title="1"/>
-      <Card title="2"/>
-      <Card title="3"/>
-      <Card title="4"/>
-      <Card title="5"/>
-      <Card title="1"/>
-      <Card title="2"/>
-      <Card title="3"/>
-      <Card title="4"/>
-      <Card title="5"/>
-      <Card title="1"/>
-      <Card title="2"/>
-      <Card title="3"/>
-      <Card title="4"/>
-      <Card title="5"/>
+    <div class="row">
+      <ItemCard title="1"/>
+      <ItemCard title="2"/>
+      <ItemCard title="3"/>
+      <ItemCard title="4"/>
+      <ItemCard title="5"/>
+      <ItemCard title="1"/>
+      <ItemCard title="2"/>
+      <ItemCard title="3"/>
+      <ItemCard title="4"/>
+      <ItemCard title="5"/>
+      <ItemCard title="1"/>
+      <ItemCard title="2"/>
+      <ItemCard title="3"/>
+      <ItemCard title="4"/>
+      <ItemCard title="5"/>
+      <ItemCard title="1"/>
+      <ItemCard title="2"/>
+      <ItemCard title="3"/>
+      <ItemCard title="4"/>
+      <ItemCard title="5"/>
+      <ItemCard title="1"/>
+      <ItemCard title="2"/>
+      <ItemCard title="3"/>
+      <ItemCard title="4"/>
+      <ItemCard title="5"/>
+      <ItemCard title="1"/>
+      <ItemCard title="2"/>
+      <ItemCard title="3"/>
+      <ItemCard title="4"/>
+      <ItemCard title="5"/>
     </div>
   </div>
   );
