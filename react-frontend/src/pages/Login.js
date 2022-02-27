@@ -42,6 +42,7 @@ export default function Login(props) {
     if (response && response.status === 200) {
       props.setUser(email);
       navigate("/profile");
+      
     } else {
       showInvalid(true);
     }
