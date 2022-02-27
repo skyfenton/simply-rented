@@ -60,14 +60,14 @@ export default function NavBar(props) {
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <Link to="rentals" class="dropdown-item">
                       My Rentals
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <Link to="listings" class="dropdown-item">
                       My Listings
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <button
