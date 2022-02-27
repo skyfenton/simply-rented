@@ -20,12 +20,12 @@ class App extends Component {
   }
 
   setUser = (email) => {
-    sessionStorage.setItem("user", JSON.stringify(email));
+    localStorage.setItem("user", JSON.stringify(email));
     this.setState({ isAuthenticated: true });
   };
 
   getUser = () => {
-    const userJson = sessionStorage.getItem("user");
+    const userJson = localStorage.getItem("user");
     const userData = JSON.parse(userJson);
     return userData;
   };
@@ -33,7 +33,7 @@ class App extends Component {
   removeUser = () => {
     if (this.getUser()) {
       console.log("removing user from session");
-      sessionStorage.removeItem("user");
+      localStorage.removeItem("user");
       this.setState({ isAuthenticated: false });
       return true;
     }
