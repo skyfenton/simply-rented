@@ -1,11 +1,18 @@
 import React from "react";
-import {
-  Link,
-  Outlet,
-} from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import "./NavBar.css";
 import badge from "./assets/logo32.png";
 
 export default function NavBar(props) {
+  const navigate = useNavigate();
+
+  function removeUser(e) {
+    e.preventDefault();
+    if (props.removeUser()) {
+      navigate("/");
+    }
+  }
+
   return (
     <>
       <div className="container">
@@ -63,9 +70,13 @@ export default function NavBar(props) {
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <button
+                      id="dropdownLogout"
+                      className="dropdown-item"
+                      onClick={removeUser}
+                    >
                       Logout
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </div>

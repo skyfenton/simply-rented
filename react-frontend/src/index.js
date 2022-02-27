@@ -15,7 +15,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuthenticated: false,
+      isAuthenticated: this.getUser() !== undefined,
     };
   }
 
@@ -53,6 +53,7 @@ class App extends Component {
               <NavBar
                 isLoggedIn={isAuthenticated}
                 getUser={this.getUser}
+                removeUser={this.removeUser}
               />
             }
           >
