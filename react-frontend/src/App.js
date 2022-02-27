@@ -46,7 +46,7 @@ export default function App() {
             path="/profile"
             element={<Profile getUser={getUser} removeUser={removeUser} />}
           />
-          <Route path="/signup" element = {<Signup getUser={getUser}/>} />
+          <Route path="/signup" element={<Signup getUser={getUser} />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Route>
       </Routes>
@@ -96,11 +96,7 @@ function NavBar() {
             >
               Login
             </Link>
-            <Link
-              to="/signup"
-              role="button"
-              className="btn btn-primary"
-            >
+            <Link to="/signup" role="button" className="btn btn-primary">
               Sign Up
             </Link>
           </div>
