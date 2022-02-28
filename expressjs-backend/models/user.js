@@ -27,16 +27,16 @@ const UserSchema = new mongoose.Schema(
     //   required: true,
     //   trim: true,
     // },
-    // listings: {
-    //   type: Object,
-    //   required: true,
-    //   trim: true,
-    // },
-    // rentals: {
-    //   type: Object,
-    //   required: true,
-    //   trim: true,
-    // },
+    listings: {
+      type: Object,
+      required: true,
+      trim: true,
+    },
+    rentals: {
+      type: Object,
+      required: true,
+      trim: true,
+    },
   },
   { collection: "users_list" }
 );
