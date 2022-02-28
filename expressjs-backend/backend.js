@@ -93,12 +93,17 @@ app.get("/searchItems", async (req, res) => {
   const query = {
     itemName: req.query["query"],
   };
-  try {
-    const result = await itemServices.findItemByName(query.itemName);
-    res.send({ result });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("An error occurred in the server.");
+  if (query.itemName === undefined) {
+    const result = await itemServices.getItems(query.itemName);
+    res.send({ items_list: result });
+  } else {
+    try {
+      const result = await itemServices.findItemByName(query.itemName);
+      res.send({ result });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("An error occurred in the server.");
+    }
   }
 });
 
