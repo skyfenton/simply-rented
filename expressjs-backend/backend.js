@@ -62,12 +62,12 @@ app.get("/searchItems", async (req, res) => {
     res.send({ item_list: result });
   } catch (error) {
     console.log(error);
-    res.status(500).send("An error ocurred in the server.");
+    res.status(500).send("An error occurred in the server.");
   }
 });
 
 function applySearch(item_list, name) {
-  if (name == undefined) {
+  if (name === undefined) {
     return item_list;
   }
   return item_list.filter(({ item }) => item.includes(name));
@@ -78,14 +78,6 @@ app.post("/signup", (req, res) => {
   const savedUser = userServices.addUser(userToAdd);
   if (savedUser) res.status(201).send(savedUser);
   else res.status(500).end();
-});
-
-app.post("/signup", (req, res) => {
-  const userToAdd = req.body;
-  if (users.has(userToAdd.email)) {
-    res.status(200).send("email exists");
-  } else if (addUser(userToAdd)) res.status(201).end();
-  else res.status(400).end();
 });
 
 // make app listen to requests at port number
