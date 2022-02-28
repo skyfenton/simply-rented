@@ -21,14 +21,24 @@ export default function ItemList() {
 
   useEffect(() => {
     getItems(query).then((res) => {
-      if (res) {
+      if (res.data.result.length) {
         setItems(res.data.result[0]);
-        console.log(res.data.result[0].values);
+        console.log(res);
+      }
+      else {
+        console.log("true");
+        setItems(["No items found with query", query].join(": "));
       }
     });
   }, []);
 
-  var items = JSON.stringify(itemData)
+  console.log(itemData);
+  if (typeof itemData == "string") {
+    var items = itemData;
+  }
+  else {
+    items = JSON.stringify(itemData);
+  }
   
   console.log(items);
   // const items = itemData
