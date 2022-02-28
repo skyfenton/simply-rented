@@ -4,22 +4,10 @@ import logo from "../assets/boxlogo.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-async function createListing(credentials) {
-  try {
-    const response = await axios.post(
-      "http://localhost:5000/create-listing",
-      credentials
-    );
-    return response;
-  } catch (error) {
-    console.log(error);
-    return false;
-  }
-}
-
 export function ListingForm(props) {
   const navigate = useNavigate();
-
+  const userEmail = props.getUser();
+  
   // redirect to profile if logged in
   // useEffect(() => {
   //   if(props.getUser()){
@@ -27,12 +15,25 @@ export function ListingForm(props) {
   //   }
   // });
 
+  async function createListing(credentials) {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/create-listing",
+        credentials
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
   const [itemName, setItemName] = useState("");
   const [itemRate, setItemRate] = useState("");
   const [itemDescription, setItemDescription] = useState("");
   const [availability, setAvailability] = useState("");
   const rating = 5.0;
-  const owner = "user";
+  const owner = userEmail;
   const renter = "N/A";
   const [error, setError] = useState("");
 

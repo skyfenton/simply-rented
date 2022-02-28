@@ -21,6 +21,11 @@ async function findItemByName(item) {
   return result;
 }
 
+async function findItemsByOwner(email) {
+  const result = await ItemModel.find({ owner: email });
+  return result;
+}
+
 async function findItemByIDAndDelete(id) {
   try {
     return await ItemModel.findByIdAndDelete(id);
@@ -54,3 +59,4 @@ exports.findItemById = findItemById;
 exports.finditemByIDAndDelete = findItemByIDAndDelete;
 exports.findItemByName = findItemByName;
 exports.addItem = addItem;
+exports.findItemsByOwner = findItemsByOwner;

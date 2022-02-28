@@ -127,6 +127,17 @@ app.post("/create-listing", (req, res) => {
   else res.status(500).end();
 });
 
+app.post("/listings", async (req, res) => {
+  const userEmail = req.body;
+  try {
+    const result = await itemServices.findItemsByOwner(userEmail.email);
+    res.send({ result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error occurred in the server.");
+  }
+});
+
 // make app listen to requests at port number
 // app.listen(port, () => {
 //   // eslint-disable-next-line no-console
