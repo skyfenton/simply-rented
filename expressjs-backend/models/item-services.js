@@ -33,12 +33,12 @@ async function findItemByIDAndDelete(id) {
   }
 }
 
-async function getItems(item) {
+async function getItems(itemName) {
   let result;
-  if (item === undefined) {
+  if (itemName === undefined) {
     result = await ItemModel.find();
-  } else if (item) {
-    result = await findItemByName(item);
+  } else if (itemName) {
+    result = await findItemByName(itemName);
   }
   return result;
 }
