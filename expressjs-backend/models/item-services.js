@@ -17,12 +17,10 @@ async function addItem(item) {
 }
 
 async function findItemByName(item) {
-  return ItemModel.find({ item });
+  const result = await ItemModel.find({ itemName: item });
+  return result;
 }
 
-async function findSearch(name) {
-  return ItemModel.find;
-}
 
 async function findItemByIDAndDelete(id) {
   try {

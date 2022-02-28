@@ -89,19 +89,13 @@ app.post("/delete", async (req, res) => {
   }
 });
 
-function applySearch(itemList, name) {
-  if (name === undefined) {
-    return itemList;
-  }
-  return itemList.filter(({ item }) => item.includes(name));
-}
-
 app.get("/searchItems", async (req, res) => {
-  const query = req.query["query"];
+  const query = {
+    itemName: req.query["query"],
+  }
   try {
-    let result = await itemServices.getItems();
-    result = applySearch(result, query);
-    res.send({ item_list: result });
+    const result = await itemServices.findItemByName(query.itemName);
+    res.send({ result });
   } catch (error) {
     console.log(error);
     res.status(500).send("An error ocurred in the server.");
@@ -124,7 +118,6 @@ app.post("/signup", async (req, res) => {
 app.post("/create-listing", (req, res) => {
   const itemToAdd = req.body;
   const savedItem = itemServices.addItem(itemToAdd);
-  console.log(savedItem);
   if (savedItem) res.status(201).send(savedItem);
   else res.status(500).end();
 });
