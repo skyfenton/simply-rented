@@ -29,10 +29,6 @@ dotenv.config();
 //     }
 //   )
 //   .catch((error) => console.log(error));
-var uri =
-  "mongodb://ZachLofquist:kutpu1-jovbab-nucwIq@Cluster0-shard-00-00.z7xan.mongodb.net:27017,cluster0-shard-00-01.z7xan.mongodb.net:27017,cluster0-shard-00-02.z7xan.mongodb.net:27017/users?ssl=true&replicaSet=atlas-141dkl-shard-0&authSource=admin&retryWrites=true&w=majority";
-
-mongoose.connect(uri).catch((error) => console.log(error));
 
 async function findUserByName(firstName) {
   const result = await UserModel.find({ firstName });
@@ -47,7 +43,6 @@ async function findUserByEmail(email) {
 async function checkUserByEmail(email) {
   return UserModel.find({ email }).count() > 0;
 }
-
 
 async function getUsers(email) {
   // Look at example of job and name to check for both so can get users by any field

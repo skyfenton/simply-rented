@@ -16,8 +16,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-
-async function verifyUser(email, password) {
+async function verifyUserPassword(email, password) {
   // Need to update further as this isn't checking password
   const user = await userServices.verifyUser(email, password);
   return user;
@@ -27,13 +26,15 @@ async function verifyUser(email, password) {
 app.post("/login", async (req, res) => {
   const { body } = req;
   if (body.email && body.password) {
-    const credCheck = await verifyUser(body.email, body.password);
+    const credCheck = await verifyUserPassword(body.email, body.password);
     if (credCheck) {
       res.status(200).end();
     } else {
       res.status(400).end();
     }
   }
+});
+
 function verifyUser(email) {
   // Need to update further as this isn't checking password!!
   const user = userServices.getUsers(email);
@@ -72,7 +73,6 @@ app.get("/items", async (req, res) => {
   }
 });
 
-
 app.post("/delete", async (req, res) => {
   const userToDeleteEmail = req.body.email;
   const check = await userServices.checkUserByEmail(userToDeleteEmail);
@@ -89,6 +89,13 @@ app.post("/delete", async (req, res) => {
   }
 });
 
+function applySearch(itemList, name) {
+  if (name === undefined) {
+    return itemList;
+  }
+  return itemList.filter(({ item }) => item.includes(name));
+}
+
 app.get("/searchItems", async (req, res) => {
   const query = req.query["query"];
   try {
@@ -100,21 +107,6 @@ app.get("/searchItems", async (req, res) => {
     res.status(500).send("An error ocurred in the server.");
   }
 });
-
-function applySearch(item_list, name) {
-  if (name == undefined) {
-    return item_list;
-  }
-  return item_list.filter(({ item }) => item.includes(name));
-}
-
-//app.post("/signup", (req, res) => {
-//  const userToAdd = req.body;
-//  const savedUser = userServices.addUser(userToAdd);
-//  if (savedUser) res.status(201).send(savedUser);
-//  else res.status(500).end();
-//});
-
 
 app.post("/signup", async (req, res) => {
   const userToAdd = req.body;
