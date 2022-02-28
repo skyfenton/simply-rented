@@ -12,11 +12,6 @@ const ItemSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    image: {
-      type: Number,
-      required: true,
-      trim: true,
-    },
   },
   { collection: "items_list" }
 );
