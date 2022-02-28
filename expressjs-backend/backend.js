@@ -92,7 +92,7 @@ app.post("/delete", async (req, res) => {
 app.get("/searchItems", async (req, res) => {
   const query = {
     itemName: req.query["query"],
-  }
+  };
   try {
     const result = await itemServices.findItemByName(query.itemName);
     res.send({ result });

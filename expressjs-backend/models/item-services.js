@@ -21,7 +21,6 @@ async function findItemByName(item) {
   return result;
 }
 
-
 async function findItemByIDAndDelete(id) {
   try {
     return await ItemModel.findByIdAndDelete(id);
