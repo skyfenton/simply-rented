@@ -2,23 +2,23 @@ const mongoose = require("mongoose");
 
 const ItemSchema = new mongoose.Schema(
   {
-    item: {
+    itemName: {
       type: String,
       required: true,
       trim: true,
     },
-    rate: {
+    itemRate: {
       type: Number,
       required: true,
       trim: true,
     },
-    description: {
+    itemDescription: {
       type: String,
       required: true,
       trim: true,
     },
-    available: {
-      type: Boolean,
+    availability: {
+      type: String,
       required: true,
       trim: true,
     },
