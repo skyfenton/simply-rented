@@ -69,7 +69,6 @@ app.post("/delete", async (req, res) => {
     const deletedUser = await userServices.findUserByIDAndDelete(
       userToDelete[0].id
     );
-    console.log(deletedUser);
     if (deletedUser) {
       res.status(201).send(deletedUser);
     } else res.status(400).end();

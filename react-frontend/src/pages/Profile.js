@@ -12,8 +12,7 @@ export default function Profile(props) {
     }
   }
 
-  async function deleteUser() {
-    console.log(user)
+  async function deleteUser(e) {
     const id = {
       email: user,
     }
@@ -23,6 +22,10 @@ export default function Profile(props) {
         "http://localhost:5000/delete",
         id
       );
+      e.preventDefault();
+      if (props.removeUser()) {
+        navigate("/");
+      }
       return response;
     } catch (error) {
       console.log(error);
