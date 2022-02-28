@@ -22,12 +22,22 @@ const UserSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    listings: {
+      type: Map,
+      of: String,
+      default: {},
+    },
+    rentals: {
+      type: Map,
+      of: String,
+      default: {},
+    },
     // zip_code: {
     //   type: Number,
     //   required: true,
     //   trim: true,
     // },
-    listings: {
+    /*listings: {
       type: Object,
       required: true,
       trim: true,
@@ -35,12 +45,12 @@ const UserSchema = new mongoose.Schema(
     rentals: {
       type: Object,
       required: true,
-      trim: true,
-    },
+      trim: true,*/
   },
   { collection: "users_list" }
 );
 
-const User = mongoose.model("User", UserSchema);
+module.exports = UserSchema;
+//const User = mongoose.model("User", UserSchema);
 
-module.exports = User;
+//module.exports = User;

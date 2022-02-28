@@ -16,6 +16,25 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+async function verifyUserPassword(email, password) {
+  // Need to update further as this isn't checking password
+  const user = await userServices.verifyUser(email, password);
+  return user;
+}
+
+// Verify login info with backend (right now just sends 200 if fields exist)
+app.post("/login", async (req, res) => {
+  const { body } = req;
+  if (body.email && body.password) {
+    const credCheck = await verifyUserPassword(body.email, body.password);
+    if (credCheck) {
+      res.status(200).end();
+    } else {
+      res.status(400).end();
+    }
+  }
+});
+
 function verifyUser(email) {
   // Need to update further as this isn't checking password!!
   const user = userServices.getUsers(email);
@@ -34,25 +53,48 @@ app.post("/login", (req, res) => {
 
 app.get("/users", async (req, res) => {
   const name = req.query.firstName;
-
   try {
     const result = await userServices.getUsers(name);
     res.send({ users_list: result });
   } catch (error) {
-    res.status(500).send("An error occurred in the server.");
+    console.log(error);
+    res.status(500).send("An error ocurred in the server");
   }
 });
 
 app.get("/items", async (req, res) => {
-  const item_name = req.query["item_name"];
+  const name = req.query.itemName;
   try {
-    const result = await itemServices.getItems(item_name);
-    res.send({ item_list: result });
+    const result = await itemServices.getItems(name);
+    res.send({ items_list: result });
   } catch (error) {
     console.log(error);
     res.status(500).send("An error ocurred in the server.");
   }
 });
+
+app.post("/delete", async (req, res) => {
+  const userToDeleteEmail = req.body.email;
+  const check = await userServices.checkUserByEmail(userToDeleteEmail);
+  if (check) {
+    res.status(200).send("user does not exists");
+  } else {
+    const userToDelete = await userServices.findUserByEmail(userToDeleteEmail);
+    const deletedUser = await userServices.findUserByIDAndDelete(
+      userToDelete[0].id
+    );
+    if (deletedUser) {
+      res.status(201).send(deletedUser);
+    } else res.status(400).end();
+  }
+});
+
+function applySearch(itemList, name) {
+  if (name === undefined) {
+    return itemList;
+  }
+  return itemList.filter(({ item }) => item.includes(name));
+}
 
 app.get("/searchItems", async (req, res) => {
   const query = req.query["query"];
@@ -66,26 +108,17 @@ app.get("/searchItems", async (req, res) => {
   }
 });
 
-function applySearch(item_list, name) {
-  if (name == undefined) {
-    return item_list;
-  }
-  return item_list.filter(({ item }) => item.includes(name));
-}
-
-app.post("/signup", (req, res) => {
+app.post("/signup", async (req, res) => {
   const userToAdd = req.body;
-  const savedUser = userServices.addUser(userToAdd);
-  if (savedUser) res.status(201).send(savedUser);
-  else res.status(500).end();
-});
-
-app.post("/signup", (req, res) => {
-  const userToAdd = req.body;
-  if (users.has(userToAdd.email)) {
+  const check = await userServices.checkUserByEmail(userToAdd.email);
+  if (check) {
     res.status(200).send("email exists");
-  } else if (addUser(userToAdd)) res.status(201).end();
-  else res.status(400).end();
+  } else {
+    const savedUser = await userServices.addUser(userToAdd);
+    if (savedUser) {
+      res.status(201).send(savedUser);
+    } else res.status(400).end();
+  }
 });
 
 app.post("/create-listing", (req, res) => {
@@ -105,5 +138,3 @@ app.post("/create-listing", (req, res) => {
 app.listen(process.env.PORT || port, () => {
   console.log("REST API is listening.");
 });
-
-// Test
