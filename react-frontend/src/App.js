@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
+import ListingForm from "./pages/ListingForm";
 
 function setUser(email) {
   sessionStorage.setItem("user", JSON.stringify(email));
@@ -32,6 +33,14 @@ function removeUser() {
   return false;
 }
 
+function newListing() {
+  if (getUser()) {
+    return true;
+  }
+  console.log("session user does not exist");
+  return false;
+}
+
 export default function App() {
   return (
     <Router>
@@ -44,9 +53,10 @@ export default function App() {
           />
           <Route
             path="/profile"
-            element={<Profile getUser={getUser} removeUser={removeUser} />}
+            element={<Profile getUser={getUser} newListing={newListing} removeUser={removeUser} />}
           />
           <Route path="/signup" element = {<Signup getUser={getUser}/>} />
+          <Route path="/create-listing" element = {<ListingForm/>} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Route>
       </Routes>
