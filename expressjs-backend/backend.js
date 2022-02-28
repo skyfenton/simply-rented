@@ -88,6 +88,14 @@ app.post("/signup", (req, res) => {
   else res.status(400).end();
 });
 
+app.post("/create-listing", (req, res) => {
+  const itemToAdd = req.body;
+  const savedItem = itemServices.addItem(itemToAdd);
+  console.log(savedItem);
+  if (savedItem) res.status(201).send(savedItem);
+  else res.status(500).end();
+});
+
 // make app listen to requests at port number
 // app.listen(port, () => {
 //   // eslint-disable-next-line no-console
