@@ -15,7 +15,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuthenticated: this.getUser() !== undefined,
+      isAuthenticated: this.getUser() !== null,
     };
   }
 
