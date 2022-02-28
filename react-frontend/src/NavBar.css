@@ -1,0 +1,7 @@
+#dropdownLogout {
+  color:#dc3545;
+}
+#dropdownLogout:hover {
+  color:white;
+  background-color: #dc3545;
+}

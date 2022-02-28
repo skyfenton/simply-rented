@@ -23,7 +23,7 @@ export default function Login(props) {
 
   // redirect to profile if logged in
   useEffect(() => {
-    if(props.getUser()){
+    if (props.getUser()) {
       navigate("/profile");
     }
   });
@@ -84,7 +84,7 @@ export default function Login(props) {
             </label>
           </div>
           {invalid ? (
-            <div style={{color: "red"}} className="mb-3">
+            <div style={{ color: "red" }} className="mb-3">
               <i className="bi bi-exclamation-triangle-fill"> </i>
               Email or password incorrect
             </div>

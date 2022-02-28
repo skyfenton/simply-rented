@@ -22,7 +22,7 @@ export function Signup(props) {
 
   // redirect to profile if logged in
   useEffect(() => {
-    if(props.getUser()){
+    if (props.getUser()) {
       navigate("/profile");
     }
   });
