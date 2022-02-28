@@ -4,8 +4,6 @@ export default function Profile(props) {
   const navigate = useNavigate();
   const user = props.getUser();
 
-
-
   function removeUser(e) {
     e.preventDefault();
     if (props.removeUser()) {
@@ -15,9 +13,7 @@ export default function Profile(props) {
 
   function newListing(e) {
     e.preventDefault();
-    if (props.newListing()) {
-      navigate("/create-listing");
-    }
+    navigate("/create-listing");
   }
 
   return (
@@ -31,7 +27,7 @@ export default function Profile(props) {
           <h2 className="pb-3">My Listings</h2>
           <div className="d-grid gap-2">
             <button
-              className="btn btn-lg btn-outline-danger"
+              className="btn btn-lg btn-secondary"
               onClick={newListing}
             >
               Create a new listing
@@ -41,7 +37,7 @@ export default function Profile(props) {
           <h2 className="pb-3">My Rentals</h2>
           <div className="d-grid gap-2">
             <button
-              className="btn btn-lg btn-outline-danger"
+              className="btn btn-lg btn-danger"
               onClick={removeUser}
             >
               Log out

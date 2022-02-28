@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
+import ListingForm from "./pages/ListingForm";
 
 class App extends Component {
   // const [isAuthenticated, changeAuth] = useState("");
@@ -77,6 +78,7 @@ class App extends Component {
               }
             />
             <Route path="/signup" element={<Signup getUser={this.getUser} />} />
+            <Route path="/create-listing" element = {<ListingForm/>} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Route>
         </Routes>
