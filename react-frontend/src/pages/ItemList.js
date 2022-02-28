@@ -21,37 +21,36 @@ export default function ItemList() {
 
   useEffect(() => {
     getItems(query).then((res) => {
-      if (res.data.result.length) {
-        setItems(res.data.result[0]);
+      if (res.data.result.length > 0) {
+        setItems(res.data.result);
         console.log(res);
       }
       else {
-        console.log("true");
+        console.log("no items");
         setItems(["No items found with query", query].join(": "));
       }
     });
   }, []);
 
   console.log(itemData);
-  if (typeof itemData == "string") {
-    var items = itemData;
-  }
-  else {
-    items = JSON.stringify(itemData);
-  }
+  // if (typeof itemData == "string") {
+  //   var items = itemData;
+  // }
+  // else {
+  //   items = JSON.stringify(itemData);
+  // }
+
+  const items = itemData
+    ? itemData.map((data, i) => {
+        return <ItemCard key={i} title={data.itemName} />;
+      })
+    : null;
+
+  // console.log(items);
   
-  console.log(items);
-  // const items = itemData
-    // ? itemData.map((data, i) => {
-    //     return <ItemCard key={i} title={data.item} />;
-    //   })
-    // : null;
-  
-  console.log(items);
   return (
     <div className="container-lg">
       <div className="row">
-        {console.log(itemData)}
         {items}
       </div>
     </div>
