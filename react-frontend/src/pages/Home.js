@@ -1,6 +1,13 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function Home() {
+  const navigate = useNavigate();
+  const [searchText, setSearch] = useState();
+
   const handleSearch = async (e) => {
     e.preventDefault();
+    navigate("/list/"+searchText);
   };
 
   return (
@@ -20,9 +27,10 @@ export default function Home() {
               className="form-control form-control-lg"
               placeholder="Search"
               aria-label="Search"
+              onChange={(t) => setSearch(t.target.value)}
             />
           </div>
-          <button type="button" class="btn btn-primary col-1">
+          <button type="submit" class="btn btn-primary col-1">
             <i class="bi bi-search"></i>
           </button>
         </form>
