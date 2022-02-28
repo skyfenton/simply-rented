@@ -108,13 +108,13 @@ app.get("/searchItems", async (req, res) => {
   }
 });
 
-app.post("/signup", (req, res) => {
+app.post("/signup", async (req, res) => {
   const userToAdd = req.body;
-  const check = userServices.checkUserByEmail(userToAdd.email);
+  const check = await userServices.checkUserByEmail(userToAdd.email);
   if (check) {
     res.status(200).send("email exists");
   } else {
-    const savedUser = userServices.addUser(userToAdd);
+    const savedUser = await userServices.addUser(userToAdd);
     if (savedUser) {
       res.status(201).send(savedUser);
     } else res.status(400).end();
