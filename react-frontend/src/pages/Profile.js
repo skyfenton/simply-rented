@@ -23,6 +23,12 @@ export default function Profile(props) {
             >
               Log out
             </button>
+            <button
+              className="btn btn-lg btn-outline-danger"
+              onClick={removeUser}
+            >
+              Delete Profile
+            </button>
           </div>
         </>
       ) : (

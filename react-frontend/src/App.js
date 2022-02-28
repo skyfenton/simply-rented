@@ -32,6 +32,16 @@ function removeUser() {
   return false;
 }
 
+function deleteUser() {
+  if (getUser()) {
+    console.log("removing user from session");
+    sessionStorage.removeItem("user");
+    return true;
+  }
+  console.log("session user does not exist");
+  return false;
+}
+
 export default function App() {
   return (
     <Router>
@@ -45,6 +55,10 @@ export default function App() {
           <Route
             path="/profile"
             element={<Profile getUser={getUser} removeUser={removeUser} />}
+          />
+          <Route
+            path="/profile"
+            element={<Profile getUser={getUser} deleteUser={deleteUser} />}
           />
           <Route path="/signup" element = {<Signup getUser={getUser}/>} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
