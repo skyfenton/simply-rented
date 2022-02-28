@@ -60,13 +60,16 @@ app.get("/items", async (req, res) => {
 });
 
 app.post("/delete", async (req, res) => {
-  console.log("BACKEND")
-  const userToDelete = req.body;
-  const check = await userServices.checkUserByEmail(userToDelete.email);
+  const userToDeleteEmail = req.body.email;
+  const check = await userServices.checkUserByEmail(userToDeleteEmail);
   if (check) {
     res.status(200).send("user does not exists");
   } else {
-    const deletedUser = await userServices.deleteUser(userToDelete.id);
+    const userToDelete = await userServices.findUserByEmail(userToDeleteEmail);
+    const deletedUser = await userServices.findUserByIDAndDelete(
+      userToDelete[0].id
+    );
+    console.log(deletedUser);
     if (deletedUser) {
       res.status(201).send(deletedUser);
     } else res.status(400).end();
@@ -77,7 +80,7 @@ app.post("/signup", async (req, res) => {
   const userToAdd = req.body;
   const check = await userServices.checkUserByEmail(userToAdd.email);
   if (check) {
-    res.status(200).send("email does not exists");
+    res.status(200).send("email exists");
   } else {
     const savedUser = await userServices.addUser(userToAdd);
     if (savedUser) {

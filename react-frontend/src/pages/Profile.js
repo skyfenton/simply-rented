@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Profile(props) {
   const navigate = useNavigate();
@@ -8,6 +9,24 @@ export default function Profile(props) {
     e.preventDefault();
     if (props.removeUser()) {
       navigate("/");
+    }
+  }
+
+  async function deleteUser() {
+    console.log(user)
+    const id = {
+      email: user,
+    }
+    console.log(id)
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/delete",
+        id
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return false;
     }
   }
 
@@ -25,7 +44,7 @@ export default function Profile(props) {
             </button>
             <button
               className="btn btn-lg btn-outline-danger"
-              onClick={removeUser}
+              onClick={deleteUser}
             >
               Delete Profile
             </button>

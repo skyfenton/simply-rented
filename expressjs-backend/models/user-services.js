@@ -91,7 +91,6 @@ async function addUser(user) {
 }
 
 async function findUserByIDAndDelete(id) {
-  console.log("HERE");
   try {
     return UserModel.findByIdAndDelete(id);
   } catch (error) {
