@@ -22,7 +22,7 @@ export function Signup(props) {
 
   // redirect to profile if logged in
   useEffect(() => {
-    if(props.getUser()){
+    if (props.getUser()) {
       navigate("/profile");
     }
   });
@@ -33,6 +33,8 @@ export function Signup(props) {
   const [username, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const listings = {};
+  const rentals = {};
 
   const handleSubmit = async (e) => {
     setError(null);
@@ -43,6 +45,8 @@ export function Signup(props) {
       email,
       username,
       password,
+      listings,
+      rentals
     });
     if (response) {
       if (response.status === 201) {

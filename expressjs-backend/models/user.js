@@ -32,8 +32,25 @@ const UserSchema = new mongoose.Schema(
       of: String,
       default: {},
     },
+    // zip_code: {
+    //   type: Number,
+    //   required: true,
+    //   trim: true,
+    // },
+    /*listings: {
+      type: Object,
+      required: true,
+      trim: true,
+    },
+    rentals: {
+      type: Object,
+      required: true,
+      trim: true,*/
   },
   { collection: "users_list" }
 );
 
 module.exports = UserSchema;
+//const User = mongoose.model("User", UserSchema);
+
+//module.exports = User;

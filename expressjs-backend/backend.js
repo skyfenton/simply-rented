@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+
 async function verifyUser(email, password) {
   // Need to update further as this isn't checking password
   const user = await userServices.verifyUser(email, password);
@@ -32,6 +33,18 @@ app.post("/login", async (req, res) => {
     } else {
       res.status(400).end();
     }
+  }
+function verifyUser(email) {
+  // Need to update further as this isn't checking password!!
+  const user = userServices.getUsers(email);
+  if (user) return true;
+  return false;
+}
+
+app.post("/login", (req, res) => {
+  const { body } = req;
+  if (body.email && body.password && verifyUser(body.email)) {
+    res.status(200).end();
   } else {
     res.status(400).end();
   }
@@ -44,7 +57,7 @@ app.get("/users", async (req, res) => {
     res.send({ users_list: result });
   } catch (error) {
     console.log(error);
-    res.status(500).send("An error ocurred in the server.");
+    res.status(500).send("An error ocurred in the server");
   }
 });
 
@@ -58,6 +71,7 @@ app.get("/items", async (req, res) => {
     res.status(500).send("An error ocurred in the server.");
   }
 });
+
 
 app.post("/delete", async (req, res) => {
   const userToDeleteEmail = req.body.email;
@@ -75,6 +89,33 @@ app.post("/delete", async (req, res) => {
   }
 });
 
+app.get("/searchItems", async (req, res) => {
+  const query = req.query["query"];
+  try {
+    let result = await itemServices.getItems();
+    result = applySearch(result, query);
+    res.send({ item_list: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error ocurred in the server.");
+  }
+});
+
+function applySearch(item_list, name) {
+  if (name == undefined) {
+    return item_list;
+  }
+  return item_list.filter(({ item }) => item.includes(name));
+}
+
+//app.post("/signup", (req, res) => {
+//  const userToAdd = req.body;
+//  const savedUser = userServices.addUser(userToAdd);
+//  if (savedUser) res.status(201).send(savedUser);
+//  else res.status(500).end();
+//});
+
+
 app.post("/signup", async (req, res) => {
   const userToAdd = req.body;
   const check = await userServices.checkUserByEmail(userToAdd.email);
@@ -88,8 +129,22 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-// make app listen to requests at port number
-app.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Example app listening at http://localhost:${port}`);
+app.post("/create-listing", (req, res) => {
+  const itemToAdd = req.body;
+  const savedItem = itemServices.addItem(itemToAdd);
+  console.log(savedItem);
+  if (savedItem) res.status(201).send(savedItem);
+  else res.status(500).end();
 });
+
+// make app listen to requests at port number
+// app.listen(port, () => {
+//   // eslint-disable-next-line no-console
+//   console.log(`Example app listening at http://localhost:${port}`);
+// });
+
+app.listen(process.env.PORT || port, () => {
+  console.log("REST API is listening.");
+});
+
+// Test

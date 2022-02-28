@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const uri =
   "mongodb://ZachLofquist:kutpu1-jovbab-nucwIq@cluster0-shard-00-00.z7xan.mongodb.net:27017,cluster0-shard-00-01.z7xan.mongodb.net:27017,cluster0-shard-00-02.z7xan.mongodb.net:27017/items?ssl=true&replicaSet=atlas-141dkl-shard-0&authSource=admin&retryWrites=true&w=majority";
 const conn = mongoose.createConnection(uri);
@@ -19,6 +18,10 @@ async function addItem(item) {
 
 async function findItemByName(item) {
   return ItemModel.find({ item });
+}
+
+async function findSearch(name) {
+  return ItemModel.find;
 }
 
 async function findItemByIDAndDelete(id) {
