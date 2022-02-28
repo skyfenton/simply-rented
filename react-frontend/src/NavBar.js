@@ -59,6 +59,11 @@ export default function NavBar(props) {
                   {props.getUser()}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li>
+                    <Link to="profile" class="dropdown-item">
+                      My Profile
+                    </Link>
+                  </li>
                   <li>
                     <Link to="rentals" class="dropdown-item">
                       My Rentals
