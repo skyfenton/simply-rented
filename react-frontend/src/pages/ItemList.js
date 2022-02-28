@@ -17,22 +17,27 @@ async function getItems(query) {
 
 export default function ItemList() {
   let { query } = useParams();
-  const [itemData, setItems] = useState(null);
+  const [itemData, setItems] = useState("");
 
   useEffect(() => {
     getItems(query).then((res) => {
       if (res) {
-        setItems(res.data.item_list);
+        setItems(res.data.result[0]);
+        console.log(res.data.result[0].values);
       }
     });
   }, []);
 
-  const items = itemData
-    ? itemData.map((data, i) => {
-        return <ItemCard key={i} title={data.item} />;
-      })
-    : null;
-
+  var items = JSON.stringify(itemData)
+  
+  console.log(items);
+  // const items = itemData
+    // ? itemData.map((data, i) => {
+    //     return <ItemCard key={i} title={data.item} />;
+    //   })
+    // : null;
+  
+  console.log(items);
   return (
     <div className="container-lg">
       <div className="row">
