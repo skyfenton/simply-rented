@@ -104,7 +104,7 @@ app.get("/searchItems", async (req, res) => {
     res.send({ item_list: result });
   } catch (error) {
     console.log(error);
-    res.status(500).send("An error ocurred in the server.");
+    res.status(500).send("An error occurred in the server.");
   }
 });
 

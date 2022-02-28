@@ -1,3 +1,6 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable quotes */
+/* eslint-disable comma-dangle */
 const mongoose = require("mongoose");
 
 const ItemSchema = new mongoose.Schema(
@@ -42,6 +45,3 @@ const ItemSchema = new mongoose.Schema(
 );
 
 module.exports = ItemSchema;
-//const Item = mongoose.model("Item", ItemSchema);
-
-//module.exports = Item;
