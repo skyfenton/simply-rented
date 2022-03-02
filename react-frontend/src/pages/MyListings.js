@@ -28,7 +28,7 @@ export function MyListings(props) {
     getItemsByUser(userEmail).then((res) => {
       if (res) {
         console.log(res)
-        setItems(res.data.result[0]);
+        setItems(res.data.result);
         console.log(res.data.result[0].values);
       }
     });
