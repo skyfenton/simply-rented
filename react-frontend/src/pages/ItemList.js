@@ -39,12 +39,19 @@ export default function ItemList() {
   // else {
   //   items = JSON.stringify(itemData);
   // }
-
-  const items = itemData
-    ? itemData.map((data, i) => {
-        return <ItemCard key={i} title={data.itemName} />;
-      })
-    : null;
+  
+  var message = "";
+  var items = "";
+  if (typeof itemData == "string") {
+    message = itemData;
+  }
+  else {
+    items = itemData
+      ? itemData.map((data, i) => {
+          return <ItemCard key={i} title={data.itemName} descrip={data.description} rate={data.rate} avail={data.availability} id={data._id}/>;
+        })
+      : null;
+  }
 
   // console.log(items);
   
@@ -52,6 +59,9 @@ export default function ItemList() {
     <div className="container-lg">
       <div className="row">
         {items}
+      </div>
+      <div className="row">
+        {message}
       </div>
     </div>
   );
