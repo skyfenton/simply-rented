@@ -73,6 +73,17 @@ app.get("/items", async (req, res) => {
   }
 });
 
+app.get("/items/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await itemServices.findItemById(id);
+    res.send({ items_list: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error ocurred in the server.");
+  }
+});
+
 app.post("/delete", async (req, res) => {
   const userToDeleteEmail = req.body.email;
   const check = await userServices.checkUserByEmail(userToDeleteEmail);
