@@ -74,7 +74,7 @@ app.get("/items", async (req, res) => {
 });
 
 app.get("/items/:id", async (req, res) => {
-  const id = req.params.id; 
+  const id = req.params.id;
   try {
     const result = await itemServices.findItemById(id);
     res.send({ items_list: result });

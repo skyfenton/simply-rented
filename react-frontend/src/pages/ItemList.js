@@ -24,8 +24,7 @@ export default function ItemList() {
       if (res.data.result.length > 0) {
         setItems(res.data.result);
         console.log(res);
-      }
-      else {
+      } else {
         console.log("no items");
         setItems(["No items found with query", query].join(": "));
       }
@@ -39,30 +38,34 @@ export default function ItemList() {
   // else {
   //   items = JSON.stringify(itemData);
   // }
-  
+
   var message = "";
   var items = "";
   if (typeof itemData == "string") {
     message = itemData;
-  }
-  else {
+  } else {
     items = itemData
       ? itemData.map((data, i) => {
-          return <ItemCard key={i} title={data.itemName} descrip={data.description} rate={data.rate} avail={data.availability} id={data._id}/>;
+          return (
+            <ItemCard
+              key={i}
+              title={data.itemName}
+              descrip={data.description}
+              rate={data.rate}
+              avail={data.availability}
+              id={data._id}
+            />
+          );
         })
       : null;
   }
 
   // console.log(items);
-  
+
   return (
     <div className="container-lg">
-      <div className="row">
-        {items}
-      </div>
-      <div className="row">
-        {message}
-      </div>
+      <div className="row">{items}</div>
+      <div className="row">{message}</div>
     </div>
   );
 }
