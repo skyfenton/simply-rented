@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import ItemList from "./ItemList";
+import ItemList from "./ItemListOwner";
 
 async function getItemsByUser(userEmail) {
   const id = {
@@ -29,6 +29,7 @@ export function MyListings(props) {
           <h1 className="pb-3">My Listings</h1>
           <div className="row">
             <ItemList
+              owner={user}
               getResponse={getItemsByUser(user)}
               error="Could not retrieve your items"
             />
