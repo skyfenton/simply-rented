@@ -63,26 +63,24 @@ class App extends Component {
             <Route index element={<Home />} />
             <Route
               path="/login"
-              element={
-                <Login
-                  setUser={this.setUser}
-                  getUser={this.getUser}
-                />
-              }
+              element={<Login setUser={this.setUser} getUser={this.getUser} />}
             />
             <Route
               path="/profile"
               element={
-                <Profile
-                  getUser={this.getUser}
-                  removeUser={this.removeUser}
-                />
+                <Profile getUser={this.getUser} removeUser={this.removeUser} />
               }
             />
             <Route path="/signup" element={<Signup getUser={this.getUser} />} />
             <Route path="/list/:query" element={<SearchResults />} />
-            <Route path="/create-listing" element = {<ListingForm  getUser={this.getUser}/>} />
-            <Route path="/listings" element = {<MyListings  getUser={this.getUser}/>} />
+            <Route
+              path="/create-listing"
+              element={<ListingForm getUser={this.getUser} />}
+            />
+            <Route
+              path="/listings"
+              element={<MyListings getUser={this.getUser} />}
+            />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Route>
         </Routes>
