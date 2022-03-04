@@ -7,8 +7,6 @@ body {
   perspective: 1000px;
 }
 .cube {
-  width: 250px;
-  height: 100px;
   -webkit-transition: all 250ms ease;
   -moz-transition: all 250ms ease;
   -o-transition: all 250ms ease;
@@ -19,21 +17,19 @@ body {
   -ms-transform-style: preserve-3d;
   transform-style: preserve-3d;
   text-align: center;
-  margin: 0 auto;
-  margin-top:100px;
 }
-.initialpanel.top{
+/* .initialpanel.top{
   visibility:hidden !important;    
-}
+} */
 .cube span{
-  color:#fff;
+  color: #000;
   line-height:100px;    
 }
 .cube > div {
-  height: 100px;
-  display:block;
-  transform:rotateX(-90deg) translateZ(50px);
-  background: #2ecc71;
+  border-style: solid;
+  border-width: thin;
+  position: relative;
+  transform:rotateX(90deg) translateZ(50px);
   margin-top:-100px;
   visibility:hidden;
   transition:all 0.3s;
@@ -50,11 +46,11 @@ body {
   display:block;
   visibility:visible;
 }
-.cube > div.top {
-  -webkit-transform: rotateX(90deg) translateZ(50px);
-  -moz-transform: rotateX(90deg) translateZ(50px);
-  -o-transform: rotateX(90deg) translateZ(50px);
-  -ms-transform: rotateX(90deg) translateZ(50px);
-  transform: rotateX(90deg) translateZ(50px);
+.cube > div.bot {
+  -webkit-transform: rotateX(-90deg) translateZ(50px);
+  -moz-transform: rotateX(-90deg) translateZ(50px);
+  -o-transform: rotateX(-90deg) translateZ(50px);
+  -ms-transform: rotateX(-90deg) translateZ(50px);
+  transform: rotateX(-90deg) translateZ(50px);
   visibility:hidden;
 }
