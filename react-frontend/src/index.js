@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import MyListings from "./pages/MyListings";
 import Signup from "./pages/Signup";
 import SearchResults from "./pages/SearchResults";
+import DetailedView from "./pages/DetailedView";
 import ListingForm from "./pages/ListingForm";
 
 class App extends Component {
@@ -73,6 +74,7 @@ class App extends Component {
             />
             <Route path="/signup" element={<Signup getUser={this.getUser} />} />
             <Route path="/list/:query" element={<SearchResults />} />
+            <Route path="/list/:query/:id" element={<DetailedView />} />
             <Route
               path="/create-listing"
               element={<ListingForm getUser={this.getUser} />}
