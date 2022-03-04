@@ -26,6 +26,11 @@ async function findItemsByOwner(email) {
   return result;
 }
 
+async function findItemsByRenter(email) {
+  const result = await ItemModel.find({ renter: email });
+  return result;
+}
+
 async function findItemByIDAndDelete(id) {
   try {
     return await ItemModel.findByIdAndDelete(id);
@@ -54,9 +59,20 @@ async function findItemById(id) {
   }
 }
 
+async function updateItemById(filter, update) {
+  try {
+    return await ItemModel.findOneAndUpdate(filter, update);
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
 exports.getItems = getItems;
 exports.findItemById = findItemById;
 exports.finditemByIDAndDelete = findItemByIDAndDelete;
 exports.findItemByName = findItemByName;
 exports.addItem = addItem;
 exports.findItemsByOwner = findItemsByOwner;
+exports.findItemsByRenter = findItemsByRenter;
+exports.updateItemById = updateItemById;
