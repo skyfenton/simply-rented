@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import MyListings from "./pages/MyListings";
 import Signup from "./pages/Signup";
 import ItemList from "./pages/ItemList";
+import DetailedView from "./pages/DetailedView";
 import ListingForm from "./pages/ListingForm";
 
 class App extends Component {
@@ -81,6 +82,7 @@ class App extends Component {
             />
             <Route path="/signup" element={<Signup getUser={this.getUser} />} />
             <Route path="/list/:query" element={<ItemList />} />
+            <Route path="/list/:query/:id" element={<DetailedView />} />
             <Route path="/create-listing" element = {<ListingForm  getUser={this.getUser}/>} />
             <Route path="/listings" element = {<MyListings  getUser={this.getUser}/>} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
