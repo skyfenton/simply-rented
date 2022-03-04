@@ -1,5 +1,6 @@
 import React from "react";
 // import axios from "axios";
+import { Navigate } from "react-router-dom";
 import "./Home.css"; 
 
 function startRotating(obj) {
@@ -12,7 +13,7 @@ function startRotating(obj) {
     }, 500);
     
     var t = setTimeout(function(){
-        if(current.index() == 4){
+        if(current.index() === 4){
             clearTimeout(t);
         } else {
             startRotating(next);
@@ -24,20 +25,23 @@ export default class Home extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      searchText: null 
+      searchText: null,
+      submit: false
     }
     this.cubeRef = React.createRef();
   }
 
   handleSearch = async (e) => {
     e.preventDefault();
-    navigate("/list/"+this.searchText);
+    this.setState({submit: true});
   };
 
   render() {
-    startRotating(cube);
+    // startRotating(cube);
+    let { submit } = this.state;
     return (
       <>
+        {submit && <Navigate to={`/list/${this.searchText}`} />}
         <div className="container position-relative">
           <div class="cube" ref={this.cubeRef}>
             <div class="initialpanel normal"><span>1st Panel</span></div>
@@ -51,7 +55,7 @@ export default class Home extends React.Component {
           </h1>
           <form
             class="input-group row mt-5 justify-content-md-center gx-0"
-            onSubmit={handleSearch}
+            onSubmit={this.handleSearch}
           >
             <div class="w-50">
               <input
@@ -60,7 +64,7 @@ export default class Home extends React.Component {
                 className="form-control form-control-lg"
                 placeholder="Search"
                 aria-label="Search"
-                onChange={(t) => setSearch(t.target.value)}
+                onChange={(t) => this.searchText = t.target.value}
               />
             </div>
             <button type="submit" class="btn btn-primary col-1">
