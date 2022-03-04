@@ -1,41 +1,74 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React from "react";
+// import axios from "axios";
+import "./Home.css"; 
 
-export default function Home() {
-  const navigate = useNavigate();
-  const [searchText, setSearch] = useState();
+function startRotating(obj) {
+    var current = obj,
+        next = current.next(),
+        prev = current.prev();
+    var flipNow = setTimeout(function(){
+        prev.addClass("top");
+        current.addClass("normal");
+    }, 500);
+    
+    var t = setTimeout(function(){
+        if(current.index() == 4){
+            clearTimeout(t);
+        } else {
+            startRotating(next);
+        }
+    },1500);
+}
 
-  const handleSearch = async (e) => {
+export default class Home extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      searchText: null 
+    }
+    this.cubeRef = React.createRef();
+  }
+
+  handleSearch = async (e) => {
     e.preventDefault();
-    navigate("/list/"+searchText);
+    navigate("/list/"+this.searchText);
   };
 
-  return (
-    <>
-      <div className="container position-relative">
-        <h1>
-          <i>Home</i>
-        </h1>
-        <form
-          class="input-group row mt-5 justify-content-md-center gx-0"
-          onSubmit={handleSearch}
-        >
-          <div class="w-50">
-            <input
-              type="text"
-              id="form1"
-              className="form-control form-control-lg"
-              placeholder="Search"
-              aria-label="Search"
-              onChange={(t) => setSearch(t.target.value)}
-            />
+  render() {
+    startRotating(cube);
+    return (
+      <>
+        <div className="container position-relative">
+          <div class="cube" ref={this.cubeRef}>
+            <div class="initialpanel normal"><span>1st Panel</span></div>
+            <div><span>2nd Panel</span></div>
+            <div><span>3rd Panel</span></div>
+            <div><span>4th Panel</span></div>
+            <div><span>5th Panel</span></div>
           </div>
-          <button type="submit" class="btn btn-primary col-1">
-            <i class="bi bi-search"></i>
-          </button>
-        </form>
-      </div>
-    </>
-  );
+          <h1>
+            <i>Home</i>
+          </h1>
+          <form
+            class="input-group row mt-5 justify-content-md-center gx-0"
+            onSubmit={handleSearch}
+          >
+            <div class="w-50">
+              <input
+                type="text"
+                id="form1"
+                className="form-control form-control-lg"
+                placeholder="Search"
+                aria-label="Search"
+                onChange={(t) => setSearch(t.target.value)}
+              />
+            </div>
+            <button type="submit" class="btn btn-primary col-1">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+        </div>
+      </>
+    );
+  }
 }
