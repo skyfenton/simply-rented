@@ -3,20 +3,18 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import "./Home.css"; 
 
-function startRotating(obj) {
-    var current = obj,
-        next = current.next(),
-        prev = current.prev();
+function startRotating(curr, prev) {
+    console.log(curr);
     var flipNow = setTimeout(function(){
-        prev.addClass("top");
-        current.addClass("normal");
+        curr.previousElementSibling.classList.add("top");
+        curr.classList.add("normal");
     }, 500);
     
     var t = setTimeout(function(){
-        if(current.index() === 4){
-            clearTimeout(t);
+        if(curr.nextElementSibling){
+          startRotating(curr.nextElementSibling);
         } else {
-            startRotating(next);
+          clearTimeout(t);
         }
     },1500);
 }
@@ -35,6 +33,10 @@ export default class Home extends React.Component {
     e.preventDefault();
     this.setState({submit: true});
   };
+
+  componentDidMount() {
+    startRotating(this.cubeRef.current.children[1]);  
+  }
 
   render() {
     // startRotating(cube);
