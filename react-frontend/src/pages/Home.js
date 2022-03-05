@@ -4,27 +4,27 @@ import { Navigate } from "react-router-dom";
 import "./Home.css";
 
 const splashWords = [
-  "anything",
-  "surfboards",
-  "projectors",
-  "people",
-  "tents",
-  "chairs",
-  "grills",
-  "dust",
-  "deez",
+  "Anything",
+  "Surfboards",
+  "Projectors",
+  "People",
+  "Tents",
+  "Chairs",
+  "Grills",
+  "Dust",
+  "Deez",
 ];
 
-function startRotating(curr, prev) {
-  console.log(curr);
+function startRotating(cube) {
+  console.log(cube);
   setTimeout(function () {
-    curr.previousElementSibling.classList.add("bot");
-    curr.classList.add("normal");
+    cube.children[0].classList.add("bot");
+    cube.children[1].classList.add("normal");
   }, 500);
 
-  var t = setTimeout(function () {
-    startRotating(curr.nextElementSibling);
-  }, 1500);
+  // var t = setTimeout(function () {
+  //   startRotating(children[1]);
+  // }, 1500);
 }
 
 export default class Home extends React.Component {
@@ -43,7 +43,7 @@ export default class Home extends React.Component {
   };
 
   componentDidMount() {
-    startRotating(this.cubeRef.current.children[1]);
+    startRotating(this.cubeRef.current);
   }
 
   render() {
@@ -52,20 +52,24 @@ export default class Home extends React.Component {
     return (
       <>
         {submit && <Navigate to={`/list/${this.searchText}`} />}
-        <div className="container position-relative">
-          <div className="row justify-content-center align-items-center">
-            <div className="col-sm-auto splash-header ">
-              <h1 class="display-1">Rent</h1>
+        <div className="d-flex justify-content-center">
+          <div className="pe-4 splash-header">
+            <h1 class="display-1">Rent</h1>
+          </div>
+          <div className="align-self-end cube" ref={this.cubeRef}>
+            <div className="normal">
+              <span>
+              <h1 class="display-1">Anything</h1>
+              </span>
             </div>
-            <div class="col-sm-4 cube" ref={this.cubeRef}>
-              <div class="normal">
-                <span>1st Panel</span>
-              </div>
-              <div>
-                <span>2nd Panel</span>
-              </div>
+            <div>
+              <span>
+              <h1 class="display-1">More</h1>
+              </span>
             </div>
           </div>
+        </div>
+        <div classname="d-flex justify-content-center">
           <form
             class="input-group row mt-5 justify-content-md-center gx-0"
             onSubmit={this.handleSearch}
