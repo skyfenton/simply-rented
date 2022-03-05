@@ -162,6 +162,14 @@ app.post("/create-listing", (req, res) => {
   else res.status(500).end();
 });
 
+app.patch("/edit-listing", async (req, res) => {
+  const newInfo = req.body;
+  const old = await itemServices.findItemById(newInfo._id);
+  const savedItem = itemServices.editItem(old, newInfo);
+  if (savedItem) res.status(201).send(savedItem);
+  else res.status(500).end();
+});
+
 app.post("/listings", async (req, res) => {
   const userEmail = req.body;
   try {
