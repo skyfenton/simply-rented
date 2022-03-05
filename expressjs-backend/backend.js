@@ -149,6 +149,31 @@ app.post("/listings", async (req, res) => {
   }
 });
 
+app.post("/rentals", async (req, res) => {
+  const userEmail = req.body;
+  try {
+    const result = await itemServices.findItemsByRenter(userEmail.email);
+    res.send({ result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error occurred in the server.");
+  }
+});
+
+app.post("/updateItemById", async (req, res) => {
+  const userEmail = req.body;
+  try {
+    const result = await itemServices.updateItemById(
+      { _id: userEmail.itemId },
+      { renter: userEmail.renter }
+    );
+    res.send({ result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error occurred in the server.");
+  }
+});
+
 // make app listen to requests at port number
 // app.listen(port, () => {
 //   // eslint-disable-next-line no-console
