@@ -1,10 +1,10 @@
 const express = require("express"); // import express
 const cors = require("cors");
-
+const bcrypt = require("bcrypt");
 const userServices = require("./models/user-services");
 const itemServices = require("./models/item-services");
 const { append } = require("express/lib/response");
-const bcrypt = require("bcrypt");
+
 const app = express();
 const port = 5000;
 

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export function ListingForm(props) {
   const navigate = useNavigate();
   const userEmail = props.getUser();
-  
+
   // redirect to profile if logged in
   // useEffect(() => {
   //   if(props.getUser()){

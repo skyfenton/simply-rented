@@ -1,8 +1,9 @@
 # simply-rented
+
 Web app for renting items you don't use every day. Created by Herculease.
 
-Code Linter/Style Checker
-------------------------------
+## Code Linter/Style Checker
+
 Using to ESLint and Prettier to format to Airbnb javascript standards.
 
 For local installs (if .eslintrc.json already exists!):
@@ -16,10 +17,10 @@ Install the Airbnb eslint config with 'npx install-peerdeps --dev eslint-config-
 Install the Airbnb prettier config with 'npm install -D eslint-config-prettier eslint-plugin-prettier'
 Add the following to a new .eslintrc.json config file:
 {
-  "extends": ["airbnb", "prettier"],
-  "plugins": ["prettier"],
-  "rules": {
-    "prettier/prettier": ["error"]
-  },
+"extends": ["airbnb", "prettier"],
+"plugins": ["prettier"],
+"rules": {
+"prettier/prettier": ["error"]
+},
 }
 Create a new .prettierrc file (with whatever prettier config settings you want)
