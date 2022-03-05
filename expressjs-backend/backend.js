@@ -100,6 +100,30 @@ app.post("/delete", async (req, res) => {
   }
 });
 
+app.post("/deleteItem", async (req, res) => {
+  console.log("BACKEND");
+  const userEmail = req.body.email;
+  const itemName = req.body.item;
+  console.log(itemName);
+  const check = await userServices.checkUserByEmail(userEmail);
+  const check2 = await itemServices.checkItem(itemName);
+  if (check && check2) {
+    res.status(200).send("user or item does not exists");
+  } else {
+    console.log(userEmail);
+    console.log(itemName);
+    console.log(req.body);
+    const itemToDelete = await itemServices.findItemByName(itemName);
+    console.log(itemToDelete);
+    const deletedItem = await itemServices.findItemByIDAndDelete(
+      itemToDelete[0].id
+    );
+    if (deletedItem) {
+      res.status(201).send(deletedItem);
+    } else res.status(400).end();
+  }
+});
+
 app.get("/searchItems", async (req, res) => {
   const query = {
     itemName: req.query["query"],
@@ -150,6 +174,31 @@ app.post("/listings", async (req, res) => {
   const userEmail = req.body;
   try {
     const result = await itemServices.findItemsByOwner(userEmail.email);
+    res.send({ result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error occurred in the server.");
+  }
+});
+
+app.post("/rentals", async (req, res) => {
+  const userEmail = req.body;
+  try {
+    const result = await itemServices.findItemsByRenter(userEmail.email);
+    res.send({ result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error occurred in the server.");
+  }
+});
+
+app.post("/updateItemById", async (req, res) => {
+  const userEmail = req.body;
+  try {
+    const result = await itemServices.updateItemById(
+      { _id: userEmail.itemId },
+      { renter: userEmail.renter }
+    );
     res.send({ result });
   } catch (error) {
     console.log(error);

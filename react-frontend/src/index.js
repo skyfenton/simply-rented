@@ -13,6 +13,7 @@ import Signup from "./pages/Signup";
 import SearchResults from "./pages/SearchResults";
 import DetailedView from "./pages/DetailedView";
 import ListingForm from "./pages/ListingForm";
+import MyRentals from "./pages/MyRentals";
 
 class App extends Component {
   // const [isAuthenticated, changeAuth] = useState("");
@@ -74,7 +75,10 @@ class App extends Component {
             />
             <Route path="/signup" element={<Signup getUser={this.getUser} />} />
             <Route path="/list/:query" element={<SearchResults />} />
-            <Route path="/list/:query/:id" element={<DetailedView />} />
+            <Route
+              path="/list/:query/:id"
+              element={<DetailedView getUser={this.getUser} />}
+            />
             <Route
               path="/create-listing"
               element={<ListingForm getUser={this.getUser} />}
@@ -82,6 +86,10 @@ class App extends Component {
             <Route
               path="/listings"
               element={<MyListings getUser={this.getUser} />}
+            />
+            <Route
+              path="/rentals"
+              element={<MyRentals getUser={this.getUser} />}
             />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Route>

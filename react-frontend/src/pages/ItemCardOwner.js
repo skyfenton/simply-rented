@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DetailedView from "./DetailedView";
 import axios from "axios";
 
@@ -12,11 +13,33 @@ async function handleClick(props) {
     return null;
   }
 }
-
 export default function ItemCard(props) {
+  const navigate = useNavigate();
   var path = "/list/" + props.title + "/" + props.id;
-  console.log("tires");
-  console.log(props.id);
+
+  async function deleteItem(item, owner) {
+    //console.log(item)
+    //console.log(owner)
+    const params = {
+      owner: owner,
+      item: item
+    }
+    console.log(params)
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/deleteItem",
+        params
+      ); 
+      navigate("/listings");
+      return response;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  console.log(props)
+
   return (
     <div className="col-6 col-sm-4 col-md-3 col-xl-2">
       <Link
@@ -42,6 +65,14 @@ export default function ItemCard(props) {
           <h5 className="card-title">{props.title}</h5>
         </div>
       </Link>
+      <p>{props.title}</p>
+      <p>{props.user}</p>
+      <button
+              className="btn btn-lg btn-danger"
+              onClick={() => deleteItem(props.title, props.user)}
+            >
+              Delete
+            </button>
     </div>
   );
 }

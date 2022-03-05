@@ -36,13 +36,23 @@ async function addItem(item) {
   }
 }
 
+async function checkItem(item) {
+  return ItemModel.find({ item }).count() > 0;
+}
+
 async function findItemByName(item) {
+  console.log(item);
   const result = await ItemModel.find({ itemName: item });
   return result;
 }
 
 async function findItemsByOwner(email) {
   const result = await ItemModel.find({ owner: email });
+  return result;
+}
+
+async function findItemsByRenter(email) {
+  const result = await ItemModel.find({ renter: email });
   return result;
 }
 
@@ -74,10 +84,22 @@ async function findItemById(id) {
   }
 }
 
+async function updateItemById(filter, update) {
+  try {
+    return await ItemModel.findOneAndUpdate(filter, update);
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
 exports.editItem = editItem;
 exports.getItems = getItems;
 exports.findItemById = findItemById;
-exports.finditemByIDAndDelete = findItemByIDAndDelete;
+exports.findItemByIDAndDelete = findItemByIDAndDelete;
 exports.findItemByName = findItemByName;
 exports.addItem = addItem;
 exports.findItemsByOwner = findItemsByOwner;
+exports.checkItem = checkItem;
+exports.findItemsByRenter = findItemsByRenter;
+exports.updateItemById = updateItemById;
