@@ -16,7 +16,12 @@ async function addItem(item) {
   }
 }
 
+async function checkItem(item) {
+  return ItemModel.find({ item }).count() > 0;
+}
+
 async function findItemByName(item) {
+  console.log(item);
   const result = await ItemModel.find({ itemName: item });
   return result;
 }
@@ -70,9 +75,10 @@ async function updateItemById(filter, update) {
 
 exports.getItems = getItems;
 exports.findItemById = findItemById;
-exports.finditemByIDAndDelete = findItemByIDAndDelete;
+exports.findItemByIDAndDelete = findItemByIDAndDelete;
 exports.findItemByName = findItemByName;
 exports.addItem = addItem;
 exports.findItemsByOwner = findItemsByOwner;
+exports.checkItem = checkItem;
 exports.findItemsByRenter = findItemsByRenter;
 exports.updateItemById = updateItemById;
