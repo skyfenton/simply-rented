@@ -8,6 +8,10 @@ const UserModel = conn.model("UserModel", require("./user"));
 
 const dotenv = require("dotenv");
 
+const bcrypt = require("bcrypt");
+const UserSchema = require("./user");
+const res = require("express/lib/response");
+
 dotenv.config();
 
 // var uri = "mongodb://ZachLofquist:kutpu1-jovbab-nucwIq@cluster0-shard-00-00.z7xan.mongodb.net:27017,cluster0-shard-00-01.z7xan.mongodb.net:27017,cluster0-shard-00-02.z7xan.mongodb.net:27017/users?ssl=true&replicaSet=atlas-141dkl-shard-0&authSource=admin&retryWrites=true&w=majority";
@@ -82,13 +86,26 @@ async function findUserById(id) {
 async function addUser(user) {
   try {
     const userToAdd = new UserModel(user);
-    const savedUser = await userToAdd.save();
+    userToAdd.password = await bcrypt.hash(userToAdd.password, 10);
+    const savedUser = userToAdd.save();
     return savedUser;
   } catch (error) {
     console.log(error);
     return false;
   }
 }
+
+// async function addUser(user) {
+//   try {
+//     const userToAdd = new UserModel(user);
+//     console.log(userToAdd);
+//     const savedUser = await userToAdd.save();
+//     return savedUser;
+//   } catch (error) {
+//     console.log(error);
+//     return false;
+//   }
+// }
 
 async function findUserByIDAndDelete(id) {
   try {
