@@ -23,7 +23,7 @@ export default function ItemList(props) {
   // console.log(props.items);
   return items !== null ? (
     items.map((data, i) => {
-      return <ItemCard key={i} title={data.itemName} />;
+      return <ItemCard key={i} title={data.itemName} id={data._id}/>;
     })
   ) : (
     <h2 text-align="center">{props.error}</h2>
