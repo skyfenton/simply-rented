@@ -1,11 +1,11 @@
-.search-wrapper{
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    align-self: center;
-    padding: 100px;
+.search-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-self: center;
+  padding: 100px;
 }
 
-input{
-    font-size: 1rem;
+input {
+  font-size: 1rem;
 }

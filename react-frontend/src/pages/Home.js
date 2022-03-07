@@ -8,7 +8,7 @@ export default function Home() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    navigate("/list/"+searchText);
+    navigate("/list/" + searchText);
   };
 
   return (

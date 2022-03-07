@@ -9,7 +9,7 @@ async function getItemsByUser(userEmail) {
   try {
     const response = await axios.post("http://localhost:5000/listings", id);
     console.log(response);
-    if(response.status === 200){
+    if (response.status === 200) {
       return response;
     }
   } catch (error) {
