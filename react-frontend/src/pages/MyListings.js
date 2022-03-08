@@ -18,9 +18,15 @@ async function getItemsByUser(userEmail) {
   }
 }
 
+
 export function MyListings(props) {
   const navigate = useNavigate();
   const user = props.getUser();
+
+  function newListing(e) {
+    e.preventDefault();
+    navigate("/create-listing");
+  }
 
   return (
     <div className="container">
@@ -33,6 +39,12 @@ export function MyListings(props) {
               getResponse={getItemsByUser(user)}
               error="You currently have no listings!"
             />
+          </div>
+          <br></br>
+          <div className="d-grid gap-2">
+            <button className="btn btn-lg btn-secondary" onClick={newListing}>
+              Create a new listing
+            </button>
           </div>
         </>
       ) : (

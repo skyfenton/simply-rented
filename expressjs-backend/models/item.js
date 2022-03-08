@@ -11,7 +11,7 @@ const ItemSchema = new mongoose.Schema(
       trim: true,
     },
     itemRate: {
-      type: Number,
+      type: String,
       required: true,
       trim: true,
     },

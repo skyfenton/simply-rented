@@ -46,18 +46,6 @@ export default function DetailedView(props) {
 
   async function updateItem(newName=itemData.itemName, newRate=itemData.itemRate, newDesc=itemData.itemDescription,
     avail=itemData.availability, newRating=itemData.rating, theOwner=itemData.owner, theRenter=itemData.renter) {
-    // var id = {};
-    // if (buttonLabel() == "Return") {
-    //   id = {
-    //     itemId: itemData._id,
-    //     renter: "N/A",
-    //   };
-    // } else {
-    //   id = {
-    //     itemId: itemData._id,
-    //     renter: user,
-    //   };
-    // }
 
     var newItem = {};
     if (buttonLabel() == "Return") {
@@ -129,7 +117,8 @@ export default function DetailedView(props) {
     else if (itemData.owner == user && buttonLabel() == "Save") {
       var descText = document.getElementById("desc").innerHTML;
       var nameText = document.getElementById("name").innerHTML;
-      await updateItem(nameText, itemData.itemRate, descText);
+      var rateText = document.getElementById("rate").innerHTML;
+      await updateItem(nameText, rateText, descText);
       setState("false");
     }
     else if (itemData.renter == "N/A" || buttonLabel() == "Return") {
@@ -164,7 +153,7 @@ export default function DetailedView(props) {
             class="card border-light mb-3"
             style={{ flex: 1, flexDirection: "row" }}
           >
-            <div
+            <div 
               id="carouselExampleIndicators"
               class="carousel slide"
               data-ride="carousel"
@@ -231,25 +220,52 @@ export default function DetailedView(props) {
                 ></span>
                 <span class="sr-only">Next</span>
               </a>
+              <br></br>
+              <div class="card" >
+                <div class="card-body">
+                  <h3 class="card-title">Item Description</h3>
+                  <p class="card-text" id="desc" contentEditable={state}>{itemData.itemDescription}</p>
+                </div>
+              </div>
+            {/* </div> */}
             </div>
+            {/* <div class="col-12 article">
+              <div class="card" >
+                <div class="card-body">
+                  <h3 class="card-title">Item Description</h3>
+                  <p class="card-text" id="desc" contentEditable={state}>{itemData.itemDescription}</p>
+                </div>
+              </div>
+            </div> */}
           </div>
         </div>
         <div className="col-6">
-          <div class="col-12 article">
+          {/* <div class="col-12 article">
             <div class="card border-light mb-3">
-              <h3 class="card-header">Owner: {itemData.owner}</h3>
+              <h3 class="card-header">Owned by {itemData.owner}</h3>
               <div class="card-body">
                 <a href="#" class="card-text">
                   (123) 456-7890
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
           <div class="col-12 article">
-            <div class="card border-light mb-3">
+            {/* <div class="card border-light mb-3">
               <h3 class="card-header" id="name" contentEditable={state}>{itemData.itemName}</h3>
               <div class="card-body">
-                <p class="card-text" id="desc" contentEditable={state}> {itemData.itemDescription}</p>
+                <h2 class="card-body" id="rate" contentEditable={state}><em>${itemData.itemRate}/day</em></h2>
+              </div>
+            </div> */}
+            <div class="card" >
+              <div class="card-body">
+                <h3 class="card-title" id="name" contentEditable={state}>{itemData.itemName}</h3>
+                <br></br>
+                <h2 class="card-subtitle mb-2 text-muted" id="rate" contentEditable={state}>{itemData.itemRate}</h2>
+                <br></br>
+                <p class="card-text" style={{fontSize: 20}}>Owned by {itemData.owner}</p>
+                {/* <a href="#" class="card-link">Add to favorites</a>
+                <a href="#" class="card-link">Contact owner</a> */}
               </div>
             </div>
           </div>
