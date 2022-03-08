@@ -6,7 +6,6 @@ import axios from "axios";
 async function handleClick(props) {
   try {
     const response = await axios.get("http://localhost:5000/items/" + props.id);
-    console.log("happy");
     console.log(response);
     return response;
   } catch (error) {
@@ -37,7 +36,6 @@ export default function ItemCard(props) {
       return false;
     }
   }
-
   return (
     <div className="col-6 col-sm-4 col-md-3 col-xl-2">
       <Link

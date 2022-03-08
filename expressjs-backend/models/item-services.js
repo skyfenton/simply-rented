@@ -25,10 +25,10 @@ async function editItem(oldL, newL) {
   }
 }
 
-async function addItem(item) {
+function addItem(item) {
   try {
     const itemToAdd = new ItemModel(item);
-    const tmp = await itemToAdd.save();
+    const tmp = itemToAdd.save();
     return itemToAdd;
   } catch (error) {
     console.log(error);
