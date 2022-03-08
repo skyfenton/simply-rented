@@ -46,7 +46,7 @@ export function Signup(props) {
       username,
       password,
       listings,
-      rentals
+      rentals,
     });
     if (response) {
       if (response.status === 201) {
