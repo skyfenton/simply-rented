@@ -209,13 +209,15 @@ app.post("/updateItemById", async (req, res) => {
   try {
     const result = await itemServices.updateItemById(
       { _id: userEmail.itemId },
-      { itemName: userEmail.itemName, 
-        itemRate: userEmail.itemRate, 
-        itemDescription: userEmail.itemDescription, 
+      {
+        itemName: userEmail.itemName,
+        itemRate: userEmail.itemRate,
+        itemDescription: userEmail.itemDescription,
         availability: userEmail.availability,
         rating: userEmail.rating,
         owner: userEmail.owner,
-        renter: userEmail.renter }
+        renter: userEmail.renter,
+      }
     );
     res.send({ result });
   } catch (error) {

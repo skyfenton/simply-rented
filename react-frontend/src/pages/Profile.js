@@ -67,18 +67,24 @@ export default function Profile(props) {
       {user ? (
         <>
           <h1 className="pb-3">My Profile</h1>
-          <div class="card" >
-                <div class="card-body">
-                  <h3 class="card-title">Contact Information</h3>
-                  <br></br>
-                  <h4 class="card-text">First Name</h4>
-                  <p class="card-text" id="first" style={{fontSize: 20}}>{userData.firstName}</p>
-                  <h4 class="card-text">Last Name</h4>
-                  <p class="card-text" id="last" style={{fontSize: 20}}>{userData.lastName}</p>
-                  <h4 class="card-text">Email</h4>
-                  <p class="card-text" id="email" style={{fontSize: 20}}>{user}</p>
-                </div>
-              </div>
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Contact Information</h3>
+              <br></br>
+              <h4 class="card-text">First Name</h4>
+              <p class="card-text" id="first" style={{ fontSize: 20 }}>
+                {userData.firstName}
+              </p>
+              <h4 class="card-text">Last Name</h4>
+              <p class="card-text" id="last" style={{ fontSize: 20 }}>
+                {userData.lastName}
+              </p>
+              <h4 class="card-text">Email</h4>
+              <p class="card-text" id="email" style={{ fontSize: 20 }}>
+                {user}
+              </p>
+            </div>
+          </div>
           <br></br>
           <div className="d-grid gap-2">
             <button className="btn btn-lg btn-danger" onClick={removeUser}>

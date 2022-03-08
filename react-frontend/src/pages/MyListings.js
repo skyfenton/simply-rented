@@ -18,7 +18,6 @@ async function getItemsByUser(userEmail) {
   }
 }
 
-
 export function MyListings(props) {
   const navigate = useNavigate();
   const user = props.getUser();
