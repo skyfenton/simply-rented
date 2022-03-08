@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import DetailedView from "./DetailedView";
 import axios from "axios";
+import baby from "../stockImages/baby.png";
+//import surfboard from ".."
 
 async function handleClick(props) {
   try {
@@ -34,7 +36,8 @@ export default function ItemCard(props) {
         className="card mb-5 box-shadow"
       >
         <img
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
+          src={baby}
+          //src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
           className="card-img-top"
           alt="..."
         />
