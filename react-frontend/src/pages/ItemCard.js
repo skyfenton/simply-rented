@@ -21,20 +21,7 @@ export default function ItemCard(props) {
   console.log(props.id);
   return (
     <div className="col-6 col-sm-4 col-md-3 col-xl-2">
-      <Link
-        to={path}
-        onClick={handleClick(props)}
-        component={
-          <DetailedView
-            title={props.title}
-            descrip={props.descrip}
-            rate={props.rate}
-            avail={props.avail}
-            id={props.id}
-          />
-        }
-        className="card mb-5 box-shadow"
-      >
+      <div className="card mb-5 box-shadow">
         <img
           src={baby}
           //src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
@@ -43,8 +30,13 @@ export default function ItemCard(props) {
         />
         <div className="card-body">
           <h5 className="card-title">{props.title}</h5>
+          <Link
+          to={path}
+          onClick={handleClick(props)}
+          className="stretched-link"
+          />
         </div>
-      </Link>
+      </div>
     </div>
   );
 }
