@@ -23,16 +23,26 @@ export function MyListings(props) {
   const navigate = useNavigate();
   const user = props.getUser();
 
+  function newListing(e) {
+    e.preventDefault();
+    navigate("/create-listing");
+  }
+
   return (
     <div className="container">
       {user ? (
         <>
           <h1 className="pb-3">My Listings</h1>
+            <div className="d-grid gap-2 mb-4">
+              <button className="btn btn-lg btn-secondary" onClick={newListing}>
+                List a new item
+              </button>
+            </div>
           <div className="row">
             <ItemList
               owner={user}
               getResponse={getItemsByUser(user)}
-              error="Could not retrieve your items"
+              error="No items listed!"
             />
           </div>
         </>
