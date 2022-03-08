@@ -85,7 +85,7 @@ export function ListingForm(props) {
               id="floatingInput"
               placeholder=""
               value={itemRate}
-              onChange={(e) => setItemRate("$" + e.target.value + "/day")}
+              onChange={(e) => setItemRate(e.target.value)}
               required
             />
             <label htmlFor="floatingInput">Item Rate (per day)</label>
