@@ -282,6 +282,7 @@ export default function DetailedView(props) {
                   /day
                 </h2>
                 <br></br>
+                <br></br>
                 <p class="card-text" style={{ fontSize: 20 }}>
                   Owned by {itemData.owner}
                 </p>
