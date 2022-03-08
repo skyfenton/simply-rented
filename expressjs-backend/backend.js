@@ -1,5 +1,6 @@
 const express = require("express"); // import express
 const cors = require("cors");
+const bcrypt = require("bcrypt");
 
 const userServices = require("./models/user-services");
 const itemServices = require("./models/item-services");
