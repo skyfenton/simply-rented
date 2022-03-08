@@ -51,8 +51,10 @@ export function ListingForm(props) {
     });
     if (response) {
       if (response.status === 201) {
+        console.log(response);
         // props.setUser(email);
-        navigate("/");
+        console.log("/item/" + response.data._id);
+        navigate("/item/" + response.data._id);
       } else {
         setError("Something bad happened, try again");
       }

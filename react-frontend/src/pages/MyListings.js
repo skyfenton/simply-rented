@@ -7,8 +7,9 @@ async function getItemsByUser(userEmail) {
     email: userEmail,
   };
   try {
+    // backend request that finds item by owner
     const response = await axios.post("http://localhost:5000/listings", id);
-    console.log(response);
+    //console.log(response);
     if (response.status === 200) {
       return response;
     }

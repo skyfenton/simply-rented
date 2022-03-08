@@ -17,10 +17,8 @@ async function getItem(id) {
 
 export default function DetailedView(props) {
   const navigate = useNavigate();
-  let { query } = useParams();
   let { id } = useParams();
   const user = props.getUser();
-  console.log(query);
   console.log(id);
   console.log(user);
 
@@ -32,8 +30,8 @@ export default function DetailedView(props) {
       if (res.data.items_list) {
         setItem(res.data.items_list);
       } else {
-        console.log("no items");
-        setItem(["No items found with query", query].join(": "));
+        console.log("no item");
+        setItem(null);
       }
     });
   }, []);
@@ -122,112 +120,116 @@ export default function DetailedView(props) {
     //     </div>
     // </div>
     <div class="container">
-      <div className="row">
-        <div class="col-6 article">
-          <div
-            class="card border-light mb-3"
-            style={{ flex: 1, flexDirection: "row" }}
-          >
+      {!itemData ? (
+        <h2>Item not found with id: {id}</h2>
+      ) : (
+        <div className="row">
+          <div class="col-6 article">
             <div
-              id="carouselExampleIndicators"
-              class="carousel slide"
-              data-ride="carousel"
+              class="card border-light mb-3"
+              style={{ flex: 1, flexDirection: "row" }}
             >
-              <ol class="carousel-indicators">
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to="0"
-                  class="active"
-                ></li>
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to="1"
-                ></li>
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to="2"
-                ></li>
-              </ol>
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img
-                    class="d-block w-100"
-                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
-                    alt="First slide"
-                  ></img>
-                </div>
-                <div class="carousel-item">
-                  <img
-                    class="d-block w-100"
-                    src="https://www.webfx.com/wp-content/uploads/2021/10/generic-image-placeholder.png"
-                    alt="Second slide"
-                  ></img>
-                </div>
-                <div class="carousel-item">
-                  <img
-                    class="d-block w-100"
-                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
-                    alt="Third slide"
-                  ></img>
-                </div>
-              </div>
-              <a
-                class="carousel-control-prev"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="prev"
+              <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-ride="carousel"
               >
-                <span
-                  class="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a
-                class="carousel-control-next"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="next"
-              >
-                <span
-                  class="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="sr-only">Next</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="col-6">
-          <div class="col-12 article">
-            <div class="card border-light mb-3">
-              <h3 class="card-header">Owner: {itemData.owner}</h3>
-              <div class="card-body">
-                <a href="#" class="card-text">
-                  (123) 456-7890
+                <ol class="carousel-indicators">
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="0"
+                    class="active"
+                  ></li>
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="1"
+                  ></li>
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="2"
+                  ></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img
+                      class="d-block w-100"
+                      src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
+                      alt="First slide"
+                    ></img>
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      class="d-block w-100"
+                      src="https://www.webfx.com/wp-content/uploads/2021/10/generic-image-placeholder.png"
+                      alt="Second slide"
+                    ></img>
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      class="d-block w-100"
+                      src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
+                      alt="Third slide"
+                    ></img>
+                  </div>
+                </div>
+                <a
+                  class="carousel-control-prev"
+                  href="#carouselExampleIndicators"
+                  role="button"
+                  data-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a
+                  class="carousel-control-next"
+                  href="#carouselExampleIndicators"
+                  role="button"
+                  data-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="sr-only">Next</span>
                 </a>
               </div>
             </div>
           </div>
-          <div class="col-12 article">
-            <div class="card border-light mb-3">
-              <h3 class="card-header">{itemData.itemName}</h3>
-              <div class="card-body">
-                <p class="card-text">{itemData.itemDescription}</p>
+          <div className="col-6">
+            <div class="col-12 article">
+              <div class="card border-light mb-3">
+                <h3 class="card-header">Owner: {itemData.owner}</h3>
+                <div class="card-body">
+                  <a href="#" class="card-text">
+                    (123) 456-7890
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="d-grid gap-2">
-            <button
-              className="btn btn-lg btn-secondary"
-              id="Action"
-              onClick={takeAction}
-            >
-              {buttonLabel()}
-            </button>
+            <div class="col-12 article">
+              <div class="card border-light mb-3">
+                <h3 class="card-header">{itemData.itemName}</h3>
+                <div class="card-body">
+                  <p class="card-text">{itemData.itemDescription}</p>
+                </div>
+              </div>
+            </div>
+            <div className="d-grid gap-2">
+              <button
+                className="btn btn-lg btn-secondary"
+                id="Action"
+                onClick={takeAction}
+              >
+                {buttonLabel()}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}{" "}
     </div>
   );
 }

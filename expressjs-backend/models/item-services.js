@@ -28,8 +28,8 @@ async function editItem(oldL, newL) {
 async function addItem(item) {
   try {
     const itemToAdd = new ItemModel(item);
-    const saveditem = await itemToAdd.save();
-    return saveditem;
+    const tmp = await itemToAdd.save();
+    return itemToAdd;
   } catch (error) {
     console.log(error);
     return false;

@@ -14,7 +14,7 @@ async function handleClick(props) {
 }
 
 export default function ItemCard(props) {
-  var path = "/list/" + props.title + "/" + props.id;
+  var path = "/item/" + props.id;
   console.log("tires");
   console.log(props.id);
   return (

@@ -9,7 +9,7 @@ export default function ItemList(props) {
       (res) => {
         if (res.data && res.data.result.length > 0) {
           setItems(res.data.result);
-          console.log(items);
+          //console.log(items);
         } else {
           setItems(null);
         }

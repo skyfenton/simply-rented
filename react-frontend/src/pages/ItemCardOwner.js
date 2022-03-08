@@ -7,6 +7,7 @@ async function handleClick(props) {
   try {
     const response = await axios.get("http://localhost:5000/items/" + props.id);
     console.log("happy");
+    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -15,21 +16,20 @@ async function handleClick(props) {
 }
 export default function ItemCard(props) {
   const navigate = useNavigate();
-  var path = "/list/" + props.title + "/" + props.id;
-
+  var path = "/item/" + props.id;
   async function deleteItem(item, owner) {
     //console.log(item)
     //console.log(owner)
     const params = {
       owner: owner,
-      item: item
-    }
-    console.log(params)
+      item: item,
+    };
+    console.log(params);
     try {
       const response = await axios.post(
         "http://localhost:5000/deleteItem",
         params
-      ); 
+      );
       navigate("/listings");
       return response;
     } catch (error) {
@@ -37,8 +37,6 @@ export default function ItemCard(props) {
       return false;
     }
   }
-
-  console.log(props)
 
   return (
     <div className="col-6 col-sm-4 col-md-3 col-xl-2">
@@ -68,11 +66,11 @@ export default function ItemCard(props) {
       <p>{props.title}</p>
       <p>{props.user}</p>
       <button
-              className="btn btn-lg btn-danger"
-              onClick={() => deleteItem(props.title, props.user)}
-            >
-              Delete
-            </button>
+        className="btn btn-lg btn-danger"
+        onClick={() => deleteItem(props.title, props.user)}
+      >
+        Delete
+      </button>
     </div>
   );
 }
