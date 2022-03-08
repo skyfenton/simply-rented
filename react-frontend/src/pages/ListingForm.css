@@ -1,3 +1,9 @@
+.form-listing {
+  width: 100%;
+  padding: 100px;
+  margin: auto;
+}
+
 .form-signup {
   width: 100%;
   max-width: 330px;
