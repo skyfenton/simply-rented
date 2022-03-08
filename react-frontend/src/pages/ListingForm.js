@@ -90,7 +90,7 @@ export function ListingForm(props) {
               onChange={(e) => setItemRate(e.target.value)}
               required
             />
-            <label htmlFor="floatingInput">Item Rate</label>
+            <label htmlFor="floatingInput">Item Rate (By Hour)</label>
           </div>
           <div className="form-floating">
             <input
