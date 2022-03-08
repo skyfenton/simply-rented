@@ -165,7 +165,8 @@ app.post("/create-listing", (req, res) => {
 app.patch("/edit-listing", async (req, res) => {
   const newInfo = req.body;
   const old = await itemServices.findItemById(newInfo._id);
-  const savedItem = itemServices.editItem(old, newInfo);
+  const savedItem = await itemServices.editItem(old, newInfo);
+  console.log(savedItem);
   if (savedItem) res.status(201).send(savedItem);
   else res.status(500).end();
 });
@@ -197,7 +198,13 @@ app.post("/updateItemById", async (req, res) => {
   try {
     const result = await itemServices.updateItemById(
       { _id: userEmail.itemId },
-      { renter: userEmail.renter }
+      { itemName: userEmail.itemName, 
+        itemRate: userEmail.itemRate, 
+        itemDescription: userEmail.itemDescription, 
+        availability: userEmail.availability,
+        rating: userEmail.rating,
+        owner: userEmail.owner,
+        renter: userEmail.renter }
     );
     res.send({ result });
   } catch (error) {

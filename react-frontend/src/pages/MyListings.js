@@ -31,7 +31,7 @@ export function MyListings(props) {
             <ItemList
               owner={user}
               getResponse={getItemsByUser(user)}
-              error="Could not retrieve your items"
+              error="You currently have no listings!"
             />
           </div>
         </>

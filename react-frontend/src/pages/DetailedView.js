@@ -1,8 +1,9 @@
 import "./DetailedView.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { renderMatches, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+// import { rawListeners } from "../../../expressjs-backend/models/user";
 // import { updateItemById } from "../../../expressjs-backend/models/item-services";
 
 async function getItem(id) {
@@ -20,11 +21,16 @@ export default function DetailedView(props) {
   let { query } = useParams();
   let { id } = useParams();
   const user = props.getUser();
+  var edit = "false";
   console.log(query);
   console.log(id);
   console.log(user);
 
   const [itemData, setItem] = useState("");
+  const [state, setState] = useState("false");
+
+
+
 
   useEffect(() => {
     getItem(id).then((res) => {
@@ -38,24 +44,43 @@ export default function DetailedView(props) {
     });
   }, []);
 
-  async function updateItem() {
-    var id = {};
+  async function updateItem(newName=itemData.itemName, newRate=itemData.itemRate, newDesc=itemData.itemDescription,
+    avail=itemData.availability, newRating=itemData.rating, theOwner=itemData.owner, theRenter=itemData.renter) {
+    // var id = {};
+    // if (buttonLabel() == "Return") {
+    //   id = {
+    //     itemId: itemData._id,
+    //     renter: "N/A",
+    //   };
+    // } else {
+    //   id = {
+    //     itemId: itemData._id,
+    //     renter: user,
+    //   };
+    // }
+
+    var newItem = {};
     if (buttonLabel() == "Return") {
-      id = {
-        itemId: itemData._id,
-        renter: "N/A",
-      };
-    } else {
-      id = {
-        itemId: itemData._id,
-        renter: user,
-      };
+      theRenter = "N/A";
+    } else if (buttonLabel() == "Rent") {
+      theRenter = user;
     }
-    console.log(id);
+
+    newItem = {
+      itemId: itemData._id,
+      itemName: newName,
+      itemRate: newRate,
+      itemDescription: newDesc,
+      availability: avail,
+      rating: newRating,
+      owner: theOwner,
+      renter: theRenter,
+    };
+    console.log(newItem);
     try {
       const response = await axios.post(
         "http://localhost:5000/updateItemById",
-        id
+        newItem
       );
       console.log(response);
       if (response.status === 200) {
@@ -67,12 +92,19 @@ export default function DetailedView(props) {
     }
   }
 
-  function buttonLabel() {
-    var label = "";
+  function buttonLabel(label="") {
     const button = document.getElementById("Action");
 
     if (itemData.renter == user) {
       label = "Return";
+    } else if (itemData.owner == user) {
+      if (state == "true") {
+        console.log("hey");
+        label = "Save";
+      }
+      else {
+        label = "Edit";
+      }
     } else if (itemData.renter == "N/A") {
       label = "Rent";
     } else {
@@ -87,26 +119,30 @@ export default function DetailedView(props) {
     return label;
   }
 
-  function buttonStatus() {
-    const button = document.getElementById("Action");
-
-    if (button.innerText === "Unavailable") {
-      button.style.visibility = "hidden";
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  function takeAction(e, userEmail) {
+  async function takeAction(e) {
     e.preventDefault();
-    if (itemData.renter == "N/A" || buttonLabel() == "Return") {
-      updateItem();
+    const button = document.getElementById("Action");
+    if (itemData.owner == user && buttonLabel() == "Edit") {
+      console.log(edit);
+      setState("true");
+    }
+    else if (itemData.owner == user && buttonLabel() == "Save") {
+      var descText = document.getElementById("desc").innerHTML;
+      var nameText = document.getElementById("name").innerHTML;
+      await updateItem(nameText, itemData.itemRate, descText);
+      setState("false");
+    }
+    else if (itemData.renter == "N/A" || buttonLabel() == "Return") {
+      await updateItem();
       navigate("/rentals");
     } else {
       navigate("/error");
     }
   }
+
+  // function handleChange(e) {
+  //   console.log(e.target);
+  // }
 
   console.log(itemData);
 
@@ -211,9 +247,9 @@ export default function DetailedView(props) {
           </div>
           <div class="col-12 article">
             <div class="card border-light mb-3">
-              <h3 class="card-header">{itemData.itemName}</h3>
+              <h3 class="card-header" id="name" contentEditable={state}>{itemData.itemName}</h3>
               <div class="card-body">
-                <p class="card-text">{itemData.itemDescription}</p>
+                <p class="card-text" id="desc" contentEditable={state}> {itemData.itemDescription}</p>
               </div>
             </div>
           </div>
