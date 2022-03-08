@@ -267,10 +267,16 @@ export default function DetailedView(props) {
                 <br></br>
                 <h2
                   class="card-subtitle mb-2 text-muted"
-                  id="rate"
-                  contentEditable={state}
-                >
-                  {itemData.itemRate}
+                  style={{display:"inline"}}
+                > $<h2
+                class="card-subtitle mb-2 text-muted"
+                id="rate"
+                style={{display:"inline"}}
+                contentEditable={state}
+              >
+                {itemData.itemRate}
+              </h2>
+                /day
                 </h2>
                 <br></br>
                 <p class="card-text" style={{ fontSize: 20 }}>
