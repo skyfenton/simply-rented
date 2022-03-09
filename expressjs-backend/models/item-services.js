@@ -1,3 +1,4 @@
+const { query } = require("express");
 const mongoose = require("mongoose");
 const uri =
   "mongodb://ZachLofquist:kutpu1-jovbab-nucwIq@cluster0-shard-00-00.z7xan.mongodb.net:27017,cluster0-shard-00-01.z7xan.mongodb.net:27017,cluster0-shard-00-02.z7xan.mongodb.net:27017/items?ssl=true&replicaSet=atlas-141dkl-shard-0&authSource=admin&retryWrites=true&w=majority";
@@ -40,9 +41,22 @@ async function checkItem(item) {
   return ItemModel.find({ item }).count() > 0;
 }
 
-async function findItemByName(item) {
-  const result = await ItemModel.find({ itemName: item });
-  return result;
+async function parseItems(items, title) {
+  const parsed = [];
+  const lowered = title.toLowerCase();
+  for (let step = 0; step < items.length; step += 1) {
+    const loweredTitle = items[step].itemName.toLowerCase();
+    if (loweredTitle.includes(lowered) === true) {
+      parsed.push(items[step]);
+    }
+  }
+  return parsed;
+}
+
+async function findItemByName(title) {
+  const items = await ItemModel.find();
+  const response = await parseItems(items, title);
+  return response;
 }
 
 async function findItemsByOwner(email) {
