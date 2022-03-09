@@ -41,7 +41,6 @@ async function checkItem(item) {
 }
 
 async function findItemByName(item) {
-  console.log(item);
   const result = await ItemModel.find({ itemName: item });
   return result;
 }
