@@ -23,32 +23,20 @@ async function verifyUserPassword(email, password) {
   return user;
 }
 
-// Verify login info with backend (right now just sends 200 if fields exist)
 app.post("/login", async (req, res) => {
-  const { body } = req;
-  if (body.email && body.password) {
-    const credCheck = await verifyUserPassword(body.email, body.password);
-    if (credCheck) {
-      res.status(200).end();
+  const user = await userServices.getUsers(req.body.email);
+  if (user === undefined || user === null) {
+    return res.status(400).send("Cannot find user");
+  }
+  try {
+    if (await bcrypt.compare(req.body.password, user[0].password)) {
+      res.sendStatus(200);
     } else {
       res.status(400).end();
     }
-  }
-});
-
-function verifyUser(email) {
-  // Need to update further as this isn't checking password!!
-  const user = userServices.getUsers(email);
-  if (user) return true;
-  return false;
-}
-
-app.post("/login", (req, res) => {
-  const { body } = req;
-  if (body.email && body.password && verifyUser(body.email)) {
-    res.status(200).end();
-  } else {
-    res.status(400).end();
+  } catch (error) {
+    console.log(error);
+    res.status(500).send();
   }
 });
 

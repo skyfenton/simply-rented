@@ -60,7 +60,8 @@ async function getUsers(email) {
 }
 
 async function checkUserByEmailPassword(email, password) {
-  const check = (await UserModel.find({ email, password }).count()) > 0;
+  const userPassword = await bcrypt.hash(password, 10);
+  const check = (await UserModel.find({ email, userPassword }).count()) > 0;
   return check;
 }
 
