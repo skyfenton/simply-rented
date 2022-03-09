@@ -18,13 +18,8 @@ async function getItem(id) {
 
 export default function DetailedView(props) {
   const navigate = useNavigate();
-  let { query } = useParams();
   let { id } = useParams();
   const user = props.getUser();
-  var edit = "false";
-  console.log(query);
-  console.log(id);
-  console.log(user);
 
   const [itemData, setItem] = useState("");
   const [state, setState] = useState("false");
@@ -35,8 +30,8 @@ export default function DetailedView(props) {
       if (res.data.items_list) {
         setItem(res.data.items_list);
       } else {
-        console.log("no items");
-        setItem(["No items found with query", query].join(": "));
+        console.log("no item");
+        setItem(null);
       }
     });
   }, []);
@@ -113,7 +108,6 @@ export default function DetailedView(props) {
     e.preventDefault();
     const button = document.getElementById("Action");
     if (itemData.owner == user && buttonLabel() == "Edit") {
-      console.log(edit);
       setState("true");
     } else if (itemData.owner == user && buttonLabel() == "Save") {
       var descText = document.getElementById("desc").innerHTML;
@@ -147,86 +141,91 @@ export default function DetailedView(props) {
     //     </div>
     // </div>
     <div class="container">
-      <div className="row">
-        <div class="col-6 article">
-          <div
-            class="card border-light mb-3"
-            style={{ flex: 1, flexDirection: "row" }}
-          >
+      {!itemData ? (
+        <h2>Item not found with id: {id}</h2>
+      ) : (
+        <div className="row">
+          <div class="col-6 article">
             <div
-              id="carouselExampleIndicators"
-              class="carousel slide"
-              data-ride="carousel"
+              class="card border-light mb-3"
+              style={{ flex: 1, flexDirection: "row" }}
             >
-              <ol class="carousel-indicators">
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to="0"
-                  class="active"
-                ></li>
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to="1"
-                ></li>
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to="2"
-                ></li>
-              </ol>
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img
-                    class="d-block w-100"
-                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
-                    alt="First slide"
-                  ></img>
-                </div>
-                <div class="carousel-item">
-                  <img
-                    class="d-block w-100"
-                    src="https://www.webfx.com/wp-content/uploads/2021/10/generic-image-placeholder.png"
-                    alt="Second slide"
-                  ></img>
-                </div>
-                <div class="carousel-item">
-                  <img
-                    class="d-block w-100"
-                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
-                    alt="Third slide"
-                  ></img>
-                </div>
-              </div>
-              <a
-                class="carousel-control-prev"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="prev"
+              <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-ride="carousel"
               >
-                <span
-                  class="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a
-                class="carousel-control-next"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="next"
-              >
-                <span
-                  class="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="sr-only">Next</span>
-              </a>
-              <br></br>
-              <div class="card">
-                <div class="card-body">
-                  <h3 class="card-title">Item Description</h3>
-                  <p class="card-text" id="desc" contentEditable={state}>
-                    {itemData.itemDescription}
-                  </p>
+                <ol class="carousel-indicators">
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="0"
+                    class="active"
+                  ></li>
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="1"
+                  ></li>
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="2"
+                  ></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img
+                      class="d-block w-100"
+                      src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
+                      alt="First slide"
+                    ></img>
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      class="d-block w-100"
+                      src="https://www.webfx.com/wp-content/uploads/2021/10/generic-image-placeholder.png"
+                      alt="Second slide"
+                    ></img>
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      class="d-block w-100"
+                      src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
+                      alt="Third slide"
+                    ></img>
+                  </div>
+                </div>
+                {/* </div> */}
+                <a
+                  class="carousel-control-prev"
+                  href="#carouselExampleIndicators"
+                  role="button"
+                  data-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a
+                  class="carousel-control-next"
+                  href="#carouselExampleIndicators"
+                  role="button"
+                  data-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="sr-only">Next</span>
+                </a>
+                <br></br>
+                <div class="card">
+                  <div class="card-body">
+                    <h3 class="card-title">Item Description</h3>
+                    <p class="card-text" id="desc" contentEditable={state}>
+                      {itemData.itemDescription}
+                    </p>
+                  </div>
                 </div>
               </div>
               {/* </div> */}
@@ -240,9 +239,9 @@ export default function DetailedView(props) {
               </div>
             </div> */}
           </div>
-        </div>
-        <div className="col-6">
-          {/* <div class="col-12 article">
+          {/* </div> */}
+          <div className="col-6">
+            {/* <div class="col-12 article">
             <div class="card border-light mb-3">
               <h3 class="card-header">Owned by {itemData.owner}</h3>
               <div class="card-body">
@@ -252,56 +251,57 @@ export default function DetailedView(props) {
               </div>
             </div>
           </div> */}
-          <div class="col-12 article">
-            {/* <div class="card border-light mb-3">
+            <div class="col-12 article">
+              {/* <div class="card border-light mb-3">
               <h3 class="card-header" id="name" contentEditable={state}>{itemData.itemName}</h3>
               <div class="card-body">
                 <h2 class="card-body" id="rate" contentEditable={state}><em>${itemData.itemRate}/day</em></h2>
               </div>
             </div> */}
-            <div class="card">
-              <div class="card-body">
-                <h3 class="card-title" id="name" contentEditable={state}>
-                  {itemData.itemName}
-                </h3>
-                <br></br>
-                <h2
-                  class="card-subtitle mb-2 text-muted"
-                  style={{ display: "inline" }}
-                >
-                  {" "}
-                  $
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title" id="name" contentEditable={state}>
+                    {itemData.itemName}
+                  </h3>
+                  <br></br>
                   <h2
                     class="card-subtitle mb-2 text-muted"
-                    id="rate"
                     style={{ display: "inline" }}
-                    contentEditable={state}
                   >
-                    {itemData.itemRate}
+                    {" "}
+                    $
+                    <h2
+                      class="card-subtitle mb-2 text-muted"
+                      id="rate"
+                      style={{ display: "inline" }}
+                      contentEditable={state}
+                    >
+                      {itemData.itemRate}
+                    </h2>
+                    /day
                   </h2>
-                  /day
-                </h2>
-                <br></br>
-                <br></br>
-                <p class="card-text" style={{ fontSize: 20 }}>
-                  Owned by {itemData.owner}
-                </p>
-                {/* <a href="#" class="card-link">Add to favorites</a>
+                  <br></br>
+                  <br></br>
+                  <p class="card-text" style={{ fontSize: 20 }}>
+                    Owned by {itemData.owner}
+                  </p>
+                  {/* <a href="#" class="card-link">Add to favorites</a>
                 <a href="#" class="card-link">Contact owner</a> */}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="d-grid gap-2">
-            <button
-              className="btn btn-lg btn-secondary"
-              id="Action"
-              onClick={takeAction}
-            >
-              {buttonLabel()}
-            </button>
+            <div className="d-grid gap-2">
+              <button
+                className="btn btn-lg btn-secondary"
+                id="Action"
+                onClick={takeAction}
+              >
+                {buttonLabel()}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}{" "}
     </div>
   );
 }

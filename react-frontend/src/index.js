@@ -76,7 +76,7 @@ class App extends Component {
             <Route path="/signup" element={<Signup getUser={this.getUser} />} />
             <Route path="/list/:query" element={<SearchResults />} />
             <Route
-              path="/list/:query/:id"
+              path="/item/:id"
               element={<DetailedView getUser={this.getUser} />}
             />
             <Route
