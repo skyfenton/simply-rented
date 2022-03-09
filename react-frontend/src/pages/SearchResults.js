@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import ItemList from "./ItemList";
 
 async function getItems(query) {
@@ -22,10 +23,41 @@ async function getItems(query) {
 export default function SearchResults() {
   let { query } = useParams();
   //console.log(query);
+  const navigate = useNavigate();
+  const [searchText, setSearch] = useState(query);
+  // const [submitState, setSubmit] = useState(false);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    navigate(`/list/${searchText}`);
+  };
+
 
   return (
     <div className="container">
-      <div className="row">
+      {/* {submitState && <Navigate to={`/list/${searchText}`}/>} */}
+      <form
+        class="input-group row mt-3 mt-md-5 justify-content-center gx-0"
+        noValidate
+        onSubmit={handleSearch}
+      >
+        <div class="w-75">
+          <input
+            type="text"
+            id="form1"
+            className="form-control form-control-lg"
+            placeholder="Search"
+            aria-label="Search"
+            onChange={(t) => (setSearch(t.target.value))}
+            value = {searchText}
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary col-1">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
+      <div className="row mt-5">
         <ItemList
           getResponse={getItems(query)}
           error={`"${query}" not found`}

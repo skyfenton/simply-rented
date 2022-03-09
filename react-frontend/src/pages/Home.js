@@ -38,6 +38,7 @@ export default class Home extends React.Component {
       this.setState({
         splashIndex: curr_i < splashWords.length - 1 ? curr_i + 1 : 0,
       });
+      this.rotate();
     }, 3500);
 
     // var t = setTimeout(function () {
@@ -70,7 +71,6 @@ export default class Home extends React.Component {
               key={this.state.splashIndex}
               timeout={500}
               classNames="side"
-              onExited={this.rotate}
             >
               <div className="normal splash-text">
                 <span>
