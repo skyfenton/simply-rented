@@ -26,7 +26,6 @@ export default function Profile(props) {
       if (res.data.users_list) {
         setUser(res.data.users_list[0]);
       } else {
-        console.log("no items");
         setUser("null");
       }
     });

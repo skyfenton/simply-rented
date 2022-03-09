@@ -14,12 +14,23 @@ async function handleClick(props) {
     return null;
   }
 }
+
 export default function ItemCard(props) {
   const navigate = useNavigate();
   var path = "/item/" + props.id;
+
+  function checkImage() {
+    if (props.image == "" || props.image == null) {
+      return "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png";
+    } else {
+      return props.image;
+    }
+  }
+
   async function deleteItem(item, owner) {
     //console.log(item)
     //console.log(owner)
+
     const params = {
       owner: owner,
       item: item,
@@ -40,11 +51,7 @@ export default function ItemCard(props) {
   return (
     <div className="col-6 col-sm-4 col-md-3 col-xl-2">
       <div className="card mb-5 box-shadow">
-        <img
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
-          className="card-img-top"
-          alt="..."
-        />
+        <img src={checkImage()} className="card-img-top" alt="..." />
         <div className="card-body">
           <h5 className="card-title">{props.title}</h5>
           <button

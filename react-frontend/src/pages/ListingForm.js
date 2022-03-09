@@ -31,15 +31,24 @@ export function ListingForm(props) {
   const [itemName, setItemName] = useState("");
   const [itemRate, setItemRate] = useState("");
   const [itemDescription, setItemDescription] = useState("");
-  const [availability, setAvailability] = useState("");
+  // const [availability, setAvailability] = useState("");
+  const availability = "yes";
   const rating = 5.0;
   const owner = userEmail;
   const renter = "N/A";
+  const [image, setImage] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     setError(null);
     e.preventDefault();
+
+    if (image == "" || image == null || image == undefined) {
+      setImage(
+        "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"
+      );
+    }
+
     const response = await createListing({
       itemName,
       itemRate,
@@ -48,6 +57,7 @@ export function ListingForm(props) {
       rating,
       owner,
       renter,
+      image,
     });
     if (response) {
       if (response.status === 201) {
@@ -103,7 +113,7 @@ export function ListingForm(props) {
             />
             <label htmlFor="floatingInput">Item Description</label>
           </div>
-          <div className="form-floating">
+          {/* <div className="form-floating">
             <input
               type="text"
               className="form-control"
@@ -114,6 +124,18 @@ export function ListingForm(props) {
               required
             />
             <label htmlFor="floatingInput">Availability</label>
+          </div> */}
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="floatingInput"
+              placeholder=""
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+              optional="true"
+            />
+            <label htmlFor="floatingInput">Item Image URL</label>
           </div>
           {error ? (
             <div style={{ color: "red" }} className="mw-100 text-center mb-3">
