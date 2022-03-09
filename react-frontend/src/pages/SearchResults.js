@@ -38,7 +38,7 @@ export default function SearchResults() {
     <div className="container">
       {/* {submitState && <Navigate to={`/list/${searchText}`}/>} */}
       <form
-        class="input-group row mt-3 mt-md-5 justify-content-center gx-0"
+        class="input-group row mt-3 mt-md-5 justify-content-center gx-0 sticky-top"
         noValidate
         onSubmit={handleSearch}
       >
