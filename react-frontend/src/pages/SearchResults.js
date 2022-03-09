@@ -29,7 +29,8 @@ export default function SearchResults() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    navigate(`/list/${searchText}`);
+    if(searchText)
+      navigate(`/list/${searchText}`);
   };
 
 

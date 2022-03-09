@@ -48,7 +48,8 @@ export default class Home extends React.Component {
 
   handleSearch = async (e) => {
     e.preventDefault();
-    this.setState({ submit: true });
+    if (this.state.searchText)
+      this.setState({ submit: true });
   };
 
   componentDidMount() {
@@ -59,7 +60,7 @@ export default class Home extends React.Component {
     let { submit } = this.state;
     return (
       <div className="container">
-        {submit && <Navigate to={`/list/${this.searchText}`} />}
+        {submit && <Navigate to={`/list/${this.state.searchText}`} />}
         <div className="row mt-5" />
         <div className="row mt-3" />
         <div className="d-flex justify-content-center">
@@ -105,7 +106,7 @@ export default class Home extends React.Component {
                 className="form-control form-control-lg"
                 placeholder="Search"
                 aria-label="Search"
-                onChange={(t) => (this.searchText = t.target.value)}
+                onChange={(t) => (this.setState({searchText: t.target.value}))}
                 required
               />
             </div>
