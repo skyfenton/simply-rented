@@ -46,9 +46,10 @@ export default function DetailedView(props) {
           // console.log(itemData)
           console.log(res.data.users_list);
           if (res.data.users_list) {
+            console.log(res.data.users_list.renter);
             setUser(res.data.users_list[0]);
           } else {
-            setUser("null");
+            setUser("N/A");
           }
         });
       } else {
@@ -124,7 +125,11 @@ export default function DetailedView(props) {
       } else {
         label = "Edit";
       }
-    } else if (itemData.renter == "N/A") {
+    } else if (
+      itemData.renter == "N/A" ||
+      itemData.renter == null ||
+      itemData.renter == undefined
+    ) {
       label = "Rent";
     } else {
       label = "Unavailable";
@@ -156,10 +161,18 @@ export default function DetailedView(props) {
       var nameText = document.getElementById("name").innerHTML;
       var rateText = document.getElementById("rate").innerHTML;
       var imgUrl = document.getElementById("image").innerHTML;
+      if (imgUrl == "") {
+        imgUrl = itemData.image;
+      }
       await updateItem(nameText, rateText, descText, imgUrl);
       setState("false");
       window.location.reload(false);
-    } else if (itemData.renter == "N/A" || buttonLabel() == "Return") {
+    } else if (
+      itemData.renter == "N/A" ||
+      itemData.renter == null ||
+      itemData.renter == undefined ||
+      buttonLabel() == "Return"
+    ) {
       await updateItem();
       navigate("/rentals");
     } else {
@@ -184,7 +197,7 @@ export default function DetailedView(props) {
     //       <h5 className="card-title">Item Description: {itemData.itemDescription}</h5>
     //     </div>
     // </div>
-    <div class="container">
+    <div id="gradient-bg" class="container">
       {!itemData ? (
         <h2>Item not found with id: {id}</h2>
       ) : (
