@@ -57,11 +57,6 @@ export default function Profile(props) {
     }
   }
 
-  // function newListing(e) {
-  //   e.preventDefault();
-  //   navigate("/create-listing");
-  // }
-
   return (
     <div className="container">
       {user ? (
@@ -88,7 +83,7 @@ export default function Profile(props) {
           <br></br>
           <div className="d-grid gap-2">
             <button className="btn btn-lg btn-danger" onClick={removeUser}>
-              Log out
+              Log Out
             </button>
             <button
               className="btn btn-lg btn-outline-danger"

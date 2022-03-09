@@ -51,6 +51,7 @@ export function ListingForm(props) {
     });
     if (response) {
       if (response.status === 201) {
+        console.log(response);
         // props.setUser(email);
         navigate("/listings");
       } else {
@@ -88,7 +89,7 @@ export function ListingForm(props) {
               onChange={(e) => setItemRate(e.target.value)}
               required
             />
-            <label htmlFor="floatingInput">Item Rate (per day)</label>
+            <label htmlFor="floatingInput">Item Rate (Per Day)</label>
           </div>
           <div className="form-floating">
             <input
