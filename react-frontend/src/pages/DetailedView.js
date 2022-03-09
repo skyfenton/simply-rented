@@ -197,7 +197,7 @@ export default function DetailedView(props) {
     //       <h5 className="card-title">Item Description: {itemData.itemDescription}</h5>
     //     </div>
     // </div>
-    <div id="gradient-bg" class="container">
+    <div class="container">
       {!itemData ? (
         <h2>Item not found with id: {id}</h2>
       ) : (
