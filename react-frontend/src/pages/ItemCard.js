@@ -17,14 +17,19 @@ export default function ItemCard(props) {
   var path = "/item/" + props.id;
   console.log("tires");
   console.log(props.id);
+
+  function checkImage() {
+    if (props.image == "" || props.image == null) {
+      return "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png";
+    } else {
+      return props.image;
+    }
+  }
+
   return (
     <div className="col-6 col-sm-4 col-md-3 col-xl-2">
       <div className="card mb-5 box-shadow">
-        <img
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
-          className="card-img-top"
-          alt="..."
-        />
+        <img src={checkImage()} className="card-img-top" alt="..." />
         <div className="card-body">
           <h5 className="card-title">{props.title}</h5>
           <Link

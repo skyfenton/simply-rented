@@ -218,6 +218,7 @@ app.post("/updateItemById", async (req, res) => {
         rating: userEmail.rating,
         owner: userEmail.owner,
         renter: userEmail.renter,
+        image: userEmail.image,
       }
     );
     res.send({ result });

@@ -28,6 +28,7 @@ export default function ItemList(props) {
           key={i}
           user={props.owner}
           title={data.itemName}
+          image={data.image}
           id={data._id}
         />
       );

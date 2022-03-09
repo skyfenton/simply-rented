@@ -24,11 +24,33 @@ export default function DetailedView(props) {
   const [itemData, setItem] = useState("");
   const [state, setState] = useState("false");
 
+  const [userData, setUser] = useState("");
+
+  async function getUser(email) {
+    try {
+      const response = await axios.get("http://localhost:5000/users/" + email);
+      console.log(user);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+
   useEffect(() => {
     getItem(id).then((res) => {
       console.log(res.data.items_list);
       if (res.data.items_list) {
         setItem(res.data.items_list);
+        getUser(res.data.items_list.owner).then((res) => {
+          // console.log(itemData)
+          console.log(res.data.users_list);
+          if (res.data.users_list) {
+            setUser(res.data.users_list[0]);
+          } else {
+            setUser("null");
+          }
+        });
       } else {
         console.log("no item");
         setItem(null);
@@ -36,10 +58,23 @@ export default function DetailedView(props) {
     });
   }, []);
 
+  // useEffect(() => {
+  //   getUser(itemData.owner).then((res) => {
+  //     console.log(itemData)
+  //     console.log(res.data.users_list);
+  //     if (res.data.users_list) {
+  //       setUser(res.data.users_list[0]);
+  //     } else {
+  //       setUser("null");
+  //     }
+  //   });
+  // }, []);
+
   async function updateItem(
     newName = itemData.itemName,
     newRate = itemData.itemRate,
     newDesc = itemData.itemDescription,
+    newImage = itemData.image,
     avail = itemData.availability,
     newRating = itemData.rating,
     theOwner = itemData.owner,
@@ -61,6 +96,7 @@ export default function DetailedView(props) {
       rating: newRating,
       owner: theOwner,
       renter: theRenter,
+      image: newImage,
     };
     console.log(newItem);
     try {
@@ -79,8 +115,6 @@ export default function DetailedView(props) {
   }
 
   function buttonLabel(label = "") {
-    const button = document.getElementById("Action");
-
     if (itemData.renter == user) {
       label = "Return";
     } else if (itemData.owner == user) {
@@ -104,6 +138,14 @@ export default function DetailedView(props) {
     return label;
   }
 
+  function checkImage() {
+    if (itemData.image == "" || itemData.image == null) {
+      return "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png";
+    } else {
+      return itemData.image;
+    }
+  }
+
   async function takeAction(e) {
     e.preventDefault();
     const button = document.getElementById("Action");
@@ -113,8 +155,10 @@ export default function DetailedView(props) {
       var descText = document.getElementById("desc").innerHTML;
       var nameText = document.getElementById("name").innerHTML;
       var rateText = document.getElementById("rate").innerHTML;
-      await updateItem(nameText, rateText, descText);
+      var imgUrl = document.getElementById("image").innerHTML;
+      await updateItem(nameText, rateText, descText, imgUrl);
       setState("false");
+      window.location.reload(false);
     } else if (itemData.renter == "N/A" || buttonLabel() == "Return") {
       await updateItem();
       navigate("/rentals");
@@ -155,69 +199,10 @@ export default function DetailedView(props) {
                 class="carousel slide"
                 data-ride="carousel"
               >
-                <ol class="carousel-indicators">
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="0"
-                    class="active"
-                  ></li>
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="1"
-                  ></li>
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="2"
-                  ></li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img
-                      class="d-block w-100"
-                      src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
-                      alt="First slide"
-                    ></img>
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      class="d-block w-100"
-                      src="https://www.webfx.com/wp-content/uploads/2021/10/generic-image-placeholder.png"
-                      alt="Second slide"
-                    ></img>
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      class="d-block w-100"
-                      src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
-                      alt="Third slide"
-                    ></img>
-                  </div>
+                <div class="card mb-3">
+                  <img class="card-img-top" src={checkImage()} />
+                  <p class="card-text" id="image" contentEditable={state}></p>
                 </div>
-                {/* </div> */}
-                <a
-                  class="carousel-control-prev"
-                  href="#carouselExampleIndicators"
-                  role="button"
-                  data-slide="prev"
-                >
-                  <span
-                    class="carousel-control-prev-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a
-                  class="carousel-control-next"
-                  href="#carouselExampleIndicators"
-                  role="button"
-                  data-slide="next"
-                >
-                  <span
-                    class="carousel-control-next-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span class="sr-only">Next</span>
-                </a>
                 <br></br>
                 <div class="card">
                   <div class="card-body">
@@ -283,7 +268,7 @@ export default function DetailedView(props) {
                   <br></br>
                   <br></br>
                   <p class="card-text" style={{ fontSize: 20 }}>
-                    Owned by {itemData.owner}
+                    Owned by {userData.firstName} {userData.lastName}
                   </p>
                   {/* <a href="#" class="card-link">Add to favorites</a>
                 <a href="#" class="card-link">Contact owner</a> */}
