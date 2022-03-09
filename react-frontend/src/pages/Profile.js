@@ -15,13 +15,10 @@ export default function Profile(props) {
   async function deleteUser(e) {
     const id = {
       email: user,
-    }
-    console.log(id)
+    };
+    console.log(id);
     try {
-      const response = await axios.post(
-        "http://localhost:5000/delete",
-        id
-      );
+      const response = await axios.post("http://localhost:5000/delete", id);
       e.preventDefault();
       if (props.removeUser()) {
         navigate("/");
@@ -48,20 +45,14 @@ export default function Profile(props) {
           <br></br>
           <h2 className="pb-3">My Listings</h2>
           <div className="d-grid gap-2">
-            <button
-              className="btn btn-lg btn-secondary"
-              onClick={newListing}
-            >
+            <button className="btn btn-lg btn-secondary" onClick={newListing}>
               Create a new listing
             </button>
           </div>
           <br></br>
           <h2 className="pb-3">My Rentals</h2>
           <div className="d-grid gap-2">
-            <button
-              className="btn btn-lg btn-danger"
-              onClick={removeUser}
-            >
+            <button className="btn btn-lg btn-danger" onClick={removeUser}>
               Log out
             </button>
             <button

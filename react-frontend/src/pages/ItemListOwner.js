@@ -1,4 +1,4 @@
-import ItemCard from "./ItemCard";
+import ItemCard from "./ItemCardOwner";
 import { useEffect, useState } from "react";
 
 export default function ItemList(props) {
@@ -9,7 +9,7 @@ export default function ItemList(props) {
       (res) => {
         if (res.data && res.data.result.length > 0) {
           setItems(res.data.result);
-          console.log(items);
+          //console.log(items);
         } else {
           setItems(null);
         }
@@ -20,10 +20,10 @@ export default function ItemList(props) {
     );
   });
 
-  // console.log(props.items);
+  //console.log(props);
   return items !== null ? (
     items.map((data, i) => {
-      return <ItemCard key={i} title={data.itemName} id={data._id} />;
+      return <ItemCard key={i} user={props.owner} title={data.itemName} />;
     })
   ) : (
     <h2 text-align="center">{props.error}</h2>

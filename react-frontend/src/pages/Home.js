@@ -57,9 +57,9 @@ export default class Home extends React.Component {
     let { submit } = this.state;
     return (
       <div className="container">
+        {submit && <Navigate to={`/list/${this.searchText}`} />}
         <div className="row mt-5"/>
         <div className="row mt-3"/>
-        {submit && <Navigate to={`/list/${this.searchText}`} />}
         <div className="d-flex justify-content-center">
           <div className="pe-3 pe-md-4 splash-text">
             <h1 class="display-1">Rent</h1>

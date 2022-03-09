@@ -8,6 +8,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "nodemon": "^2.0.15",
     "prettier": "^2.5.1"
   },
   "name": "simply-rented",
@@ -26,5 +27,9 @@
   "bugs": {
     "url": "https://github.com/herculease/simply-rented/issues"
   },
-  "homepage": "https://github.com/herculease/simply-rented#readme"
+  "homepage": "https://github.com/herculease/simply-rented#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.3"
+  }
 }

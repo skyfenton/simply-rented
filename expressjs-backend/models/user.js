@@ -22,16 +22,16 @@ const UserSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    listings: {
-      type: Map,
-      of: String,
-      default: {},
-    },
-    rentals: {
-      type: Map,
-      of: String,
-      default: {},
-    },
+    // listings: {
+    //   type: Map,
+    //   of: String,
+    //   default: {},
+    // },
+    // rentals: {
+    //   type: Map,
+    //   of: String,
+    //   default: {},
+    // },
     // zip_code: {
     //   type: Number,
     //   required: true,

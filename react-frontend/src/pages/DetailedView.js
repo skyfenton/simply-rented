@@ -1,7 +1,9 @@
 import "./DetailedView.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+// import { updateItemById } from "../../../expressjs-backend/models/item-services";
 
 async function getItem(id) {
   try {
@@ -13,11 +15,14 @@ async function getItem(id) {
   }
 }
 
-export default function DetailedView() {
+export default function DetailedView(props) {
+  const navigate = useNavigate();
   let { query } = useParams();
   let { id } = useParams();
+  const user = props.getUser();
   console.log(query);
   console.log(id);
+  console.log(user);
 
   const [itemData, setItem] = useState("");
 
@@ -32,6 +37,76 @@ export default function DetailedView() {
       }
     });
   }, []);
+
+  async function updateItem() {
+    var id = {};
+    if (buttonLabel() == "Return") {
+      id = {
+        itemId: itemData._id,
+        renter: "N/A",
+      };
+    } else {
+      id = {
+        itemId: itemData._id,
+        renter: user,
+      };
+    }
+    console.log(id);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/updateItemById",
+        id
+      );
+      console.log(response);
+      if (response.status === 200) {
+        return response;
+      }
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  function buttonLabel() {
+    var label = "";
+    const button = document.getElementById("Action");
+
+    if (itemData.renter == user) {
+      label = "Return";
+    } else if (itemData.renter == "N/A") {
+      label = "Rent";
+    } else {
+      label = "Unavailable";
+      if (document.getElementById("Action") != null) {
+        document.getElementById("Action").disabled = true;
+      }
+      // document.addEventListener("DOMContentLoaded", function(event) {
+      //     button.disabled = true;
+      // });
+    }
+    return label;
+  }
+
+  function buttonStatus() {
+    const button = document.getElementById("Action");
+
+    if (button.innerText === "Unavailable") {
+      button.style.visibility = "hidden";
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function takeAction(e, userEmail) {
+    e.preventDefault();
+    if (itemData.renter == "N/A" || buttonLabel() == "Return") {
+      updateItem();
+      navigate("/rentals");
+    } else {
+      navigate("/error");
+    }
+  }
 
   console.log(itemData);
 
@@ -84,7 +159,7 @@ export default function DetailedView() {
                 <div class="carousel-item">
                   <img
                     class="d-block w-100"
-                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2FPlaceholder.png&f=1&nofb=1"
+                    src="https://www.webfx.com/wp-content/uploads/2021/10/generic-image-placeholder.png"
                     alt="Second slide"
                   ></img>
                 </div>
@@ -141,6 +216,15 @@ export default function DetailedView() {
                 <p class="card-text">{itemData.itemDescription}</p>
               </div>
             </div>
+          </div>
+          <div className="d-grid gap-2">
+            <button
+              className="btn btn-lg btn-secondary"
+              id="Action"
+              onClick={takeAction}
+            >
+              {buttonLabel()}
+            </button>
           </div>
         </div>
       </div>

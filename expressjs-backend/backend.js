@@ -1,8 +1,9 @@
 const express = require("express"); // import express
 const cors = require("cors");
-
+const bcrypt = require("bcrypt");
 const userServices = require("./models/user-services");
 const itemServices = require("./models/item-services");
+const { append } = require("express/lib/response");
 
 const app = express();
 const port = 5000;
@@ -16,40 +17,58 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-async function verifyUserPassword(email, password) {
-  // Need to update further as this isn't checking password
-  const user = await userServices.verifyUser(email, password);
-  return user;
-}
+// async function verifyUserPassword(email, password) {
+//   // Need to update further as this isn't checking password
+//   const user = await userServices.verifyUser(email, password);
+//   return user;
+// }
 
-// Verify login info with backend (right now just sends 200 if fields exist)
 app.post("/login", async (req, res) => {
-  const { body } = req;
-  if (body.email && body.password) {
-    const credCheck = await verifyUserPassword(body.email, body.password);
-    if (credCheck) {
-      res.status(200).end();
+  const user = await userServices.getUsers(req.body.email);
+  if (user === undefined || user === null) {
+    return res.status(400).send("Cannot find user");
+  }
+  try {
+    if (await bcrypt.compare(req.body.password, user[0].password)) {
+      res.sendStatus(200);
     } else {
       res.status(400).end();
     }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send();
   }
 });
 
-function verifyUser(email) {
-  // Need to update further as this isn't checking password!!
-  const user = userServices.getUsers(email);
-  if (user) return true;
-  return false;
-}
+// // Verify login info with backend (right now just sends 200 if fields exist)
+// app.post("/login", async (req, res) => {
+//   const { body } = req;
+//   if (body.email && body.password) {
+//     const credCheck = await verifyUserPassword(body.email, body.password);
+//     if (credCheck) {
+//       res.status(200).end();
+//     } else {
+//       res.status(400).end();
+//     }
+//   }
+// });
 
-app.post("/login", (req, res) => {
-  const { body } = req;
-  if (body.email && body.password && verifyUser(body.email)) {
-    res.status(200).end();
-  } else {
-    res.status(400).end();
-  }
-});
+// function verifyUser(email) {
+//   // Need to update further as this isn't checking password!!
+//   const user = userServices.getUsers(email);
+//   if (user) return true;
+//   return false;
+// }
+
+// app.post("/login", (req, res) => {
+//   const { body } = req;
+//   console.log(req);
+//   if (body.email && body.password && verifyUser(body.email)) {
+//     res.status(200).end();
+//   } else {
+//     res.status(400).end();
+//   }
+// });
 
 app.get("/users", async (req, res) => {
   const name = req.query.firstName;
@@ -74,7 +93,7 @@ app.get("/items", async (req, res) => {
 });
 
 app.get("/items/:id", async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     const result = await itemServices.findItemById(id);
     res.send({ items_list: result });
@@ -96,6 +115,30 @@ app.post("/delete", async (req, res) => {
     );
     if (deletedUser) {
       res.status(201).send(deletedUser);
+    } else res.status(400).end();
+  }
+});
+
+app.post("/deleteItem", async (req, res) => {
+  console.log("BACKEND");
+  const userEmail = req.body.email;
+  const itemName = req.body.item;
+  console.log(itemName);
+  const check = await userServices.checkUserByEmail(userEmail);
+  const check2 = await itemServices.checkItem(itemName);
+  if (check && check2) {
+    res.status(200).send("user or item does not exists");
+  } else {
+    console.log(userEmail);
+    console.log(itemName);
+    console.log(req.body);
+    const itemToDelete = await itemServices.findItemByName(itemName);
+    console.log(itemToDelete);
+    const deletedItem = await itemServices.findItemByIDAndDelete(
+      itemToDelete[0].id
+    );
+    if (deletedItem) {
+      res.status(201).send(deletedItem);
     } else res.status(400).end();
   }
 });
@@ -138,10 +181,43 @@ app.post("/create-listing", (req, res) => {
   else res.status(500).end();
 });
 
+app.patch("/edit-listing", async (req, res) => {
+  const newInfo = req.body;
+  const old = await itemServices.findItemById(newInfo._id);
+  const savedItem = itemServices.editItem(old, newInfo);
+  if (savedItem) res.status(201).send(savedItem);
+  else res.status(500).end();
+});
+
 app.post("/listings", async (req, res) => {
   const userEmail = req.body;
   try {
     const result = await itemServices.findItemsByOwner(userEmail.email);
+    res.send({ result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error occurred in the server.");
+  }
+});
+
+app.post("/rentals", async (req, res) => {
+  const userEmail = req.body;
+  try {
+    const result = await itemServices.findItemsByRenter(userEmail.email);
+    res.send({ result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error occurred in the server.");
+  }
+});
+
+app.post("/updateItemById", async (req, res) => {
+  const userEmail = req.body;
+  try {
+    const result = await itemServices.updateItemById(
+      { _id: userEmail.itemId },
+      { renter: userEmail.renter }
+    );
     res.send({ result });
   } catch (error) {
     console.log(error);
