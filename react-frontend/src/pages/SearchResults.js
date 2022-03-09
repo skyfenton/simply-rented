@@ -29,10 +29,16 @@ export default function SearchResults() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    if(searchText)
-      navigate(`/list/${searchText}`);
+    navigate(`/list/${searchText}`);
   };
 
+  function checkSearch(text) {
+    if (text == "undefined") {
+      return "";
+    } else {
+      return searchText;
+    }
+  }
 
   return (
     <div className="container">
@@ -49,9 +55,9 @@ export default function SearchResults() {
             className="form-control form-control-lg"
             placeholder="Search"
             aria-label="Search"
-            onChange={(t) => (setSearch(t.target.value))}
-            value = {searchText}
-            required
+            onChange={(t) => setSearch(t.target.value)}
+            value={checkSearch(searchText)}
+            optional="true"
           />
         </div>
         <button type="submit" class="btn btn-primary col-1">

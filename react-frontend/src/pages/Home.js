@@ -48,8 +48,11 @@ export default class Home extends React.Component {
 
   handleSearch = async (e) => {
     e.preventDefault();
-    if (this.state.searchText)
+    if (this.state.searchText) this.setState({ submit: true });
+    else {
+      this.setState({ searchText: "undefined" });
       this.setState({ submit: true });
+    }
   };
 
   componentDidMount() {
@@ -106,8 +109,8 @@ export default class Home extends React.Component {
                 className="form-control form-control-lg"
                 placeholder="Search"
                 aria-label="Search"
-                onChange={(t) => (this.setState({searchText: t.target.value}))}
-                required
+                onChange={(t) => this.setState({ searchText: t.target.value })}
+                optional="true"
               />
             </div>
             <button type="submit" class="btn btn-primary col-1">
