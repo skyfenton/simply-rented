@@ -41,7 +41,7 @@ export default function SearchResults() {
         noValidate
         onSubmit={handleSearch}
       >
-        <div class="w-75">
+        <div class="col-7">
           <input
             type="text"
             id="form1"
