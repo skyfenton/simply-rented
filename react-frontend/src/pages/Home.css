@@ -10,7 +10,7 @@ body {
 .cube {
   height: inherit;
   display: grid;
-  overflow:visible;
+  overflow: visible;
   grid-template-columns: 1fr;
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
@@ -52,14 +52,14 @@ body {
   -ms-transform: rotateX(0deg) translateZ(2em);
   transform: rotateX(0deg) translateZ(2em); */
   opacity: 1;
-  display:block;
-  visibility:visible;
+  display: block;
+  visibility: visible;
 }
 
 .side-exit {
   opacity: 1;
-  display:block;
-  visibility:visible;
+  display: block;
+  visibility: visible;
 }
 
 .side-exit-active {

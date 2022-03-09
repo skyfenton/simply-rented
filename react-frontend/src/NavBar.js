@@ -28,11 +28,15 @@ export default function NavBar(props) {
               height="32"
               aria-label="Bootstrap"
             />
-            <h4 style={{
-              background: "-webkit-linear-gradient(315deg, #da8eff 0%, #8909d8 100%)",
-              "-webkit-background-clip": "text",
-              "-webkit-text-fill-color": "transparent"}}>
-            Simply Rented
+            <h4
+              style={{
+                background:
+                  "-webkit-linear-gradient(315deg, #da8eff 0%, #8909d8 100%)",
+                "-webkit-background-clip": "text",
+                "-webkit-text-fill-color": "transparent",
+              }}
+            >
+              Simply Rented
             </h4>
           </Link>
 

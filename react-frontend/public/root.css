@@ -1,26 +1,23 @@
-.search-wrapper{
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    align-self: center;
-    padding: 100px;
+.search-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-self: center;
+  padding: 100px;
 }
 
-input{
-    font-size: 1rem;
+input {
+  font-size: 1rem;
 }
 
 #gradient-bg {
   min-height: 100vh;
   background-color: white;
-  background-image:
-    linear-gradient(
-      to bottom, 
-      white 80%, #d3a8ed
-    );
+  background-image: linear-gradient(to bottom, white 80%, #d3a8ed);
   background-repeat: no-repeat;
 }
 
-html, body {
+html,
+body {
   min-height: 100vh;
 }
