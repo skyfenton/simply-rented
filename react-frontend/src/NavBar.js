@@ -23,28 +23,18 @@ export default function NavBar(props) {
           >
             <img
               src={badge}
-              className="bi me-2"
+              className="bi me-3"
               width="32"
               height="32"
               aria-label="Bootstrap"
             />
+            <h4 style={{
+              background: "-webkit-linear-gradient(315deg, #da8eff 0%, #8909d8 100%)",
+              "-webkit-background-clip": "text",
+              "-webkit-text-fill-color": "transparent"}}>
+            Simply Rented
+            </h4>
           </Link>
-
-          <ul
-            className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0"
-            hidden
-          >
-            <li>
-              <Link to="/" className="nav-link px-2 link-secondary">
-                Home
-              </Link>
-            </li>
-            <li>
-              <a href="/about" className="nav-link px-2 link-dark">
-                About
-              </a>
-            </li>
-          </ul>
 
           <div className="col-md-3 text-end">
             {props.isLoggedIn ? (
