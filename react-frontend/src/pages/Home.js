@@ -3,12 +3,16 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import "./Home.css";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import card1 from "../assets/instructcard1.png";
+import card2 from "../assets/instructcard2.png";
+import card3 from "../assets/instructcard3.png";
+import card4 from "../assets/instructcard4.png";
 
 const splashWords = [
   "Anything",
   "Surfboards",
   "Projectors",
-  "People",
+  "People?",
   "Tents",
   "Chairs",
   "Grills",
@@ -52,7 +56,9 @@ export default class Home extends React.Component {
   render() {
     let { submit } = this.state;
     return (
-      <>
+      <div className="container">
+        <div className="row mt-5"/>
+        <div className="row mt-3"/>
         {submit && <Navigate to={`/list/${this.searchText}`} />}
         <div className="d-flex justify-content-center">
           <div className="pe-3 pe-md-4 splash-text">
@@ -88,7 +94,7 @@ export default class Home extends React.Component {
             class="input-group row mt-3 mt-md-5 justify-content-center gx-0"
             onSubmit={this.handleSearch}
           >
-            <div class="w-50">
+            <div class="w-75">
               <input
                 type="text"
                 id="form1"
@@ -104,7 +110,13 @@ export default class Home extends React.Component {
             </button>
           </form>
         </div>
-      </>
+          <div classname="row">
+            <img className="col-12 col-md-3 mt-5" src={card1} alt="Find it!"/>
+            <img className="col-12 col-md-3 mt-5" src={card2} alt="Rent it!"/>
+            <img className="col-12 col-md-3 mt-5" src={card3} alt="Take it!"/>
+            <img className="col-12 col-md-3 mt-5" src={card4} alt="Return it!"/>
+          </div>
+      </div>
     );
   }
 }
