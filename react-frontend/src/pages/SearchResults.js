@@ -4,12 +4,13 @@ import ItemList from "./ItemList";
 
 async function getItems(query) {
   try {
+    //console.log(query);
     const response = await axios.get(
       "http://localhost:5000/searchItems?query=" + query
     );
     if (response.status === 200) {
       console.log("RESPONSE");
-      console.log(response);
+      //console.log(response);
       return response;
     }
   } catch (error) {
@@ -20,7 +21,7 @@ async function getItems(query) {
 
 export default function SearchResults() {
   let { query } = useParams();
-  console.log(query);
+  //console.log(query);
 
   return (
     <div className="container">

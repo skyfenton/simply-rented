@@ -140,9 +140,9 @@ app.get("/searchItems", async (req, res) => {
   const query = {
     itemName: req.query["query"],
   };
-  if (query.itemName === undefined) {
-    const result = await itemServices.getItems(query.itemName);
-    res.send({ items_list: result });
+  if (query.itemName === "undefined") {
+    const result = await itemServices.getItems();
+    res.send({ result });
   } else {
     try {
       const result = await itemServices.findItemByName(query.itemName);
