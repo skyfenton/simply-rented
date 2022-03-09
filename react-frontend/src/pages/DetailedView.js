@@ -1,8 +1,9 @@
 import "./DetailedView.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { renderMatches, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+// import { rawListeners } from "../../../expressjs-backend/models/user";
 // import { updateItemById } from "../../../expressjs-backend/models/item-services";
 
 async function getItem(id) {
@@ -20,11 +21,13 @@ export default function DetailedView(props) {
   let { query } = useParams();
   let { id } = useParams();
   const user = props.getUser();
+  var edit = "false";
   console.log(query);
   console.log(id);
   console.log(user);
 
   const [itemData, setItem] = useState("");
+  const [state, setState] = useState("false");
 
   useEffect(() => {
     getItem(id).then((res) => {
@@ -38,24 +41,37 @@ export default function DetailedView(props) {
     });
   }, []);
 
-  async function updateItem() {
-    var id = {};
+  async function updateItem(
+    newName = itemData.itemName,
+    newRate = itemData.itemRate,
+    newDesc = itemData.itemDescription,
+    avail = itemData.availability,
+    newRating = itemData.rating,
+    theOwner = itemData.owner,
+    theRenter = itemData.renter
+  ) {
+    var newItem = {};
     if (buttonLabel() == "Return") {
-      id = {
-        itemId: itemData._id,
-        renter: "N/A",
-      };
-    } else {
-      id = {
-        itemId: itemData._id,
-        renter: user,
-      };
+      theRenter = "N/A";
+    } else if (buttonLabel() == "Rent") {
+      theRenter = user;
     }
-    console.log(id);
+
+    newItem = {
+      itemId: itemData._id,
+      itemName: newName,
+      itemRate: newRate,
+      itemDescription: newDesc,
+      availability: avail,
+      rating: newRating,
+      owner: theOwner,
+      renter: theRenter,
+    };
+    console.log(newItem);
     try {
       const response = await axios.post(
         "http://localhost:5000/updateItemById",
-        id
+        newItem
       );
       console.log(response);
       if (response.status === 200) {
@@ -67,12 +83,18 @@ export default function DetailedView(props) {
     }
   }
 
-  function buttonLabel() {
-    var label = "";
+  function buttonLabel(label = "") {
     const button = document.getElementById("Action");
 
     if (itemData.renter == user) {
       label = "Return";
+    } else if (itemData.owner == user) {
+      if (state == "true") {
+        console.log("hey");
+        label = "Save";
+      } else {
+        label = "Edit";
+      }
     } else if (itemData.renter == "N/A") {
       label = "Rent";
     } else {
@@ -87,26 +109,29 @@ export default function DetailedView(props) {
     return label;
   }
 
-  function buttonStatus() {
-    const button = document.getElementById("Action");
-
-    if (button.innerText === "Unavailable") {
-      button.style.visibility = "hidden";
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  function takeAction(e, userEmail) {
+  async function takeAction(e) {
     e.preventDefault();
-    if (itemData.renter == "N/A" || buttonLabel() == "Return") {
-      updateItem();
+    const button = document.getElementById("Action");
+    if (itemData.owner == user && buttonLabel() == "Edit") {
+      console.log(edit);
+      setState("true");
+    } else if (itemData.owner == user && buttonLabel() == "Save") {
+      var descText = document.getElementById("desc").innerHTML;
+      var nameText = document.getElementById("name").innerHTML;
+      var rateText = document.getElementById("rate").innerHTML;
+      await updateItem(nameText, rateText, descText);
+      setState("false");
+    } else if (itemData.renter == "N/A" || buttonLabel() == "Return") {
+      await updateItem();
       navigate("/rentals");
     } else {
       navigate("/error");
     }
   }
+
+  // function handleChange(e) {
+  //   console.log(e.target);
+  // }
 
   console.log(itemData);
 
@@ -195,25 +220,74 @@ export default function DetailedView(props) {
                 ></span>
                 <span class="sr-only">Next</span>
               </a>
+              <br></br>
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">Item Description</h3>
+                  <p class="card-text" id="desc" contentEditable={state}>
+                    {itemData.itemDescription}
+                  </p>
+                </div>
+              </div>
+              {/* </div> */}
             </div>
+            {/* <div class="col-12 article">
+              <div class="card" >
+                <div class="card-body">
+                  <h3 class="card-title">Item Description</h3>
+                  <p class="card-text" id="desc" contentEditable={state}>{itemData.itemDescription}</p>
+                </div>
+              </div>
+            </div> */}
           </div>
         </div>
         <div className="col-6">
-          <div class="col-12 article">
+          {/* <div class="col-12 article">
             <div class="card border-light mb-3">
-              <h3 class="card-header">Owner: {itemData.owner}</h3>
+              <h3 class="card-header">Owned by {itemData.owner}</h3>
               <div class="card-body">
                 <a href="#" class="card-text">
                   (123) 456-7890
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
           <div class="col-12 article">
-            <div class="card border-light mb-3">
-              <h3 class="card-header">{itemData.itemName}</h3>
+            {/* <div class="card border-light mb-3">
+              <h3 class="card-header" id="name" contentEditable={state}>{itemData.itemName}</h3>
               <div class="card-body">
-                <p class="card-text">{itemData.itemDescription}</p>
+                <h2 class="card-body" id="rate" contentEditable={state}><em>${itemData.itemRate}/day</em></h2>
+              </div>
+            </div> */}
+            <div class="card">
+              <div class="card-body">
+                <h3 class="card-title" id="name" contentEditable={state}>
+                  {itemData.itemName}
+                </h3>
+                <br></br>
+                <h2
+                  class="card-subtitle mb-2 text-muted"
+                  style={{ display: "inline" }}
+                >
+                  {" "}
+                  $
+                  <h2
+                    class="card-subtitle mb-2 text-muted"
+                    id="rate"
+                    style={{ display: "inline" }}
+                    contentEditable={state}
+                  >
+                    {itemData.itemRate}
+                  </h2>
+                  /day
+                </h2>
+                <br></br>
+                <br></br>
+                <p class="card-text" style={{ fontSize: 20 }}>
+                  Owned by {itemData.owner}
+                </p>
+                {/* <a href="#" class="card-link">Add to favorites</a>
+                <a href="#" class="card-link">Contact owner</a> */}
               </div>
             </div>
           </div>
