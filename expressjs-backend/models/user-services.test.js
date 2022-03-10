@@ -91,6 +91,5 @@ test("Testing Find User by ID and Delete -- Success", async () => {
 
 test("Testing Find User by ID and Delete -- Failure", async () => {
   const result = await myFunctions.findUserByIDAndDelete();
-  console.log(result);
   expect(result).toBeFalsy();
 });

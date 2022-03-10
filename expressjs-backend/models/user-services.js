@@ -7,10 +7,7 @@ const conn = mongoose.createConnection(uri);
 const UserModel = conn.model("UserModel", require("./user"));
 
 const dotenv = require("dotenv");
-
 const bcrypt = require("bcrypt");
-const UserSchema = require("./user");
-const res = require("express/lib/response");
 
 dotenv.config();
 
@@ -53,7 +50,7 @@ async function getUsers(email) {
   let result;
   if (email === undefined) {
     result = await UserModel.find();
-  } else if (email) {
+  } else {
     result = await findUserByEmail(email);
   }
   return result;
@@ -75,20 +72,11 @@ async function verifyUser(email, password) {
   return result;
 }
 
-async function findUserById(id) {
-  try {
-    return await UserModel.findById(id);
-  } catch (error) {
-    console.log(error);
-    return undefined;
-  }
-}
-
 async function addUser(user) {
   try {
     const userToAdd = new UserModel(user);
     userToAdd.password = await bcrypt.hash(userToAdd.password, 10);
-    const savedUser = userToAdd.save();
+    const savedUser = await userToAdd.save();
     return savedUser;
   } catch (error) {
     console.log(error);
@@ -96,29 +84,11 @@ async function addUser(user) {
   }
 }
 
-// async function addUser(user) {
-//   try {
-//     const userToAdd = new UserModel(user);
-//     console.log(userToAdd);
-//     const savedUser = await userToAdd.save();
-//     return savedUser;
-//   } catch (error) {
-//     console.log(error);
-//     return false;
-//   }
-// }
-
 async function findUserByIDAndDelete(id) {
-  try {
-    return UserModel.findByIdAndDelete(id);
-  } catch (error) {
-    console.log(error);
-    return undefined;
-  }
+  return UserModel.findByIdAndDelete(id);
 }
 
 exports.getUsers = getUsers;
-exports.findUserById = findUserById;
 exports.findUserByIDAndDelete = findUserByIDAndDelete;
 exports.findUserByName = findUserByName;
 exports.findUserByEmail = findUserByEmail;
