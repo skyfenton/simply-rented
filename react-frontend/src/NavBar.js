@@ -52,7 +52,11 @@ export default function NavBar(props) {
                 >
                   {props.getUser()}
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <ul
+                  class="dropdown-menu"
+                  aria-labelledby="dropdownMenuLink"
+                  style={{ position: "absolute", zIndex: 1021 }}
+                >
                   <li>
                     <Link to="/" class="dropdown-item">
                       Home

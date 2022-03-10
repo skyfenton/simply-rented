@@ -60,7 +60,7 @@ export default function SearchResults() {
             optional="true"
           />
         </div>
-        <button type="submit" class="btn btn-primary col-1">
+        <button type="submit" class="btn btn-primary col-1 gx-100">
           <i class="bi bi-search"></i>
         </button>
       </form>
