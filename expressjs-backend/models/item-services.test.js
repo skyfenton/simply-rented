@@ -7,7 +7,7 @@ const testItem = {
   availability: "testingJesting",
   rating: 5,
   owner: "jest owner",
-  renter: "jest renter"
+  renter: "jest renter",
 };
 
 const editedItem = {
@@ -17,7 +17,7 @@ const editedItem = {
   availability: "testingJesting",
   rating: 5,
   owner: "jest owner",
-  renter: "jest renter"
+  renter: "jest renter",
 };
 
 const failItem = {};
@@ -60,7 +60,7 @@ test("Testing Check Item", async () => {
 test("Testing Parse Items", async () => {
   const items = await myFunctions.getItems();
   const result_list = await myFunctions.parseItems(items, "jest");
-  const result = result_list[0]
+  const result = result_list[0];
   const target = testItem;
   expect(result.itemName).toBe(target.itemName);
   expect(result.itemRate).toBe(target.itemRate);
@@ -149,7 +149,7 @@ test("Testing Update Item by ID", async () => {
     rating: 5,
     owner: "jest owner",
     renter: "jest renter",
-    image: 'https://townsquare.media/site/13/files/2014/06/Push-mower.jpg'
+    image: "https://townsquare.media/site/13/files/2014/06/Push-mower.jpg",
   });
   expect(result.itemName).toBe(target.itemName);
   expect(result.itemRate).toBe(target.itemRate);

@@ -65,19 +65,25 @@ test("Testing Get Users -- Defined Email", async () => {
 });
 
 test("Testing Check User By Email Password", async () => {
-  const result = await myFunctions.checkUserByEmail("AppleJuiceFailure", "FailurePassword");
+  const result = await myFunctions.checkUserByEmail(
+    "AppleJuiceFailure",
+    "FailurePassword"
+  );
   expect(result).toBeFalsy();
 });
 
 test("Testing Verify User -- Undefined", async () => {
   const result = await myFunctions.verifyUser();
   expect(result).toBeFalsy();
-})
+});
 
 test("Testing Verify User -- Defined", async () => {
-  const result = await myFunctions.verifyUser("AppleJuiceFailure", "FailurePassword");
+  const result = await myFunctions.verifyUser(
+    "AppleJuiceFailure",
+    "FailurePassword"
+  );
   expect(result).toBeFalsy();
-})
+});
 
 test("Testing Find User by ID and Delete -- Success", async () => {
   const user = await myFunctions.findUserByName("jest_user");
