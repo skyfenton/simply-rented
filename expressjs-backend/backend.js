@@ -17,12 +17,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-async function verifyUserPassword(email, password) {
-  // Need to update further as this isn't checking password
-  const user = await userServices.verifyUser(email, password);
-  return user;
-}
-
 app.post("/login", async (req, res) => {
   const user = await userServices.getUsers(req.body.email);
   if (user === undefined || user === null) {
@@ -30,13 +24,13 @@ app.post("/login", async (req, res) => {
   }
   try {
     if (await bcrypt.compare(req.body.password, user[0].password)) {
-      res.sendStatus(200);
+      return res.sendStatus(200);
     } else {
-      res.status(400).end();
+      return res.status(400).end();
     }
   } catch (error) {
     console.log(error);
-    res.status(500).send();
+    return res.status(500).send();
   }
 });
 
@@ -158,15 +152,6 @@ app.post("/signup", async (req, res) => {
 app.post("/create-listing", (req, res) => {
   const itemToAdd = req.body;
   const savedItem = itemServices.addItem(itemToAdd);
-  if (savedItem) res.status(201).send(savedItem);
-  else res.status(500).end();
-});
-
-app.patch("/edit-listing", async (req, res) => {
-  const newInfo = req.body;
-  const old = await itemServices.findItemById(newInfo._id);
-  const savedItem = await itemServices.editItem(old, newInfo);
-  console.log(savedItem);
   if (savedItem) res.status(201).send(savedItem);
   else res.status(500).end();
 });
