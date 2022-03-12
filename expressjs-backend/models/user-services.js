@@ -95,5 +95,3 @@ exports.findUserByEmail = findUserByEmail;
 exports.checkUserByEmail = checkUserByEmail;
 exports.addUser = addUser;
 exports.verifyUser = verifyUser;
-
-// CI TEST
