@@ -2,6 +2,12 @@
 
 Web app for renting items you don't use every day. Created by Herculease.
 
+Instructions to run on local machine:
+
+Open files, run "npm i" in both react-frontend and expressjs-backend subdirectories via terminal
+"node backend.js" command in backend directory to start up backend
+"npm start" command in frontend directory to start up frontend/website
+
 ## Code Linter/Style Checker
 
 Using to ESLint and Prettier to format to Airbnb javascript standards.
