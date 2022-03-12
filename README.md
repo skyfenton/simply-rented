@@ -20,7 +20,7 @@ Select the following options when running the congig setup
   * No
   * browser, node
   * guide
-  * aribnb
+  * airbnb
   * JSON
 Install dependencies
 Run with npx eslint [file.js]
