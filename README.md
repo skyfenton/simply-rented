@@ -8,6 +8,10 @@ Open files, run "npm i" in both react-frontend and expressjs-backend subdirector
 "node backend.js" command in backend directory to start up backend
 "npm start" command in frontend directory to start up frontend/website
 
+## Diagrams
+
+https://github.com/herculease/simply-rented/wiki/Herculease-Diagrams
+
 ## Code Linter/Style Checker
 
 Using to ESLint and Prettier to format to Airbnb javascript standards.
