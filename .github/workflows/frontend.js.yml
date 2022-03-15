@@ -40,3 +40,4 @@ jobs:
         heroku_app_name: "simply-rented-frontend"
         heroku_email: "zlofquis@calpoly.edu"
         appdir: "react-frontend"
+        
