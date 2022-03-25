@@ -6,15 +6,11 @@ import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 //const API_BASE_URL = 'http://localhost:5000';
-const API_BASE_URL = 'https://simply-rented-backend.herokuapp.com';
-
+const API_BASE_URL = "https://simply-rented-backend.herokuapp.com";
 
 async function loginUser(credentials) {
   try {
-    const response = await axios.post(
-      API_BASE_URL + "/login",
-      credentials
-    );
+    const response = await axios.post(API_BASE_URL + "/login", credentials);
     return response;
   } catch (error) {
     console.log(error);

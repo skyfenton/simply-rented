@@ -3,7 +3,7 @@ import axios from "axios";
 import ItemList from "./ItemList";
 
 //const API_BASE_URL = 'http://localhost:5000';
-const API_BASE_URL = 'https://simply-rented-backend.herokuapp.com';
+const API_BASE_URL = "https://simply-rented-backend.herokuapp.com";
 
 async function getRentalsByUser(userEmail) {
   const id = {

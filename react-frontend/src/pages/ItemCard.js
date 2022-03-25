@@ -3,7 +3,7 @@ import DetailedView from "./DetailedView";
 import axios from "axios";
 
 //const API_BASE_URL = 'http://localhost:5000';
-const API_BASE_URL = 'https://simply-rented-backend.herokuapp.com';
+const API_BASE_URL = "https://simply-rented-backend.herokuapp.com";
 
 async function handleClick(props) {
   try {

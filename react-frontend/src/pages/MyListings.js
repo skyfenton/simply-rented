@@ -3,7 +3,7 @@ import axios from "axios";
 import ItemList from "./ItemListOwner";
 
 //const API_BASE_URL = 'http://localhost:5000';
-const API_BASE_URL = 'https://simply-rented-backend.herokuapp.com';
+const API_BASE_URL = "https://simply-rented-backend.herokuapp.com";
 
 async function getItemsByUser(userEmail) {
   const id = {
@@ -11,7 +11,7 @@ async function getItemsByUser(userEmail) {
   };
   try {
     // backend request that finds item by owner
-    const response = await axios.post(API_BASE_URL+ "/listings", id);
+    const response = await axios.post(API_BASE_URL + "/listings", id);
     //console.log(response);
     if (response.status === 200) {
       return response;

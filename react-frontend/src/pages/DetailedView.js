@@ -7,8 +7,7 @@ import { useParams } from "react-router-dom";
 // import { updateItemById } from "../../../expressjs-backend/models/item-services";
 
 // const API_BASE_URL = 'http://localhost:5000';
-const API_BASE_URL = 'https://simply-rented-backend.herokuapp.com';
-
+const API_BASE_URL = "https://simply-rented-backend.herokuapp.com";
 
 async function getItem(id) {
   try {

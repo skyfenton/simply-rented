@@ -5,8 +5,7 @@ import axios from "axios";
 import "./ItemCard.css";
 
 //const API_BASE_URL = 'http://localhost:5000';
-const API_BASE_URL = 'https://simply-rented-backend.herokuapp.com';
-
+const API_BASE_URL = "https://simply-rented-backend.herokuapp.com";
 
 async function handleClick(props) {
   try {
@@ -41,10 +40,7 @@ export default function ItemCard(props) {
     };
     console.log(params);
     try {
-      const response = await axios.post(
-        API_BASE_URL + "/deleteItem",
-        params
-      );
+      const response = await axios.post(API_BASE_URL + "/deleteItem", params);
       navigate("/listings");
       return response;
     } catch (error) {
