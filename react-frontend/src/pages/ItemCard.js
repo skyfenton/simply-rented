@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import DetailedView from "./DetailedView";
 import axios from "axios";
 
+//const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://simply-rented-backend.herokuapp.com';
+
 async function handleClick(props) {
   try {
-    const response = await axios.get("http://localhost:5000/items/" + props.id);
+    const response = await axios.get(API_BASE_URL + "/items/" + props.id);
     console.log("happy");
     return response;
   } catch (error) {

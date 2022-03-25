@@ -2,6 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+//const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://simply-rented-backend.herokuapp.com';
+
 export default function Profile(props) {
   const navigate = useNavigate();
   const user = props.getUser();
@@ -10,7 +13,7 @@ export default function Profile(props) {
 
   async function getUser(email) {
     try {
-      const response = await axios.get("http://localhost:5000/users/" + email);
+      const response = await axios.get(API_BASE_URL + "/users/" + email);
       console.log(user);
       return response;
     } catch (error) {
@@ -44,7 +47,7 @@ export default function Profile(props) {
     };
     console.log(id);
     try {
-      const response = await axios.post("http://localhost:5000/delete", id);
+      const response = await axios.post(API_BASE_URL + "/delete", id);
       e.preventDefault();
       if (props.removeUser()) {
         navigate("/");

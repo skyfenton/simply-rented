@@ -3,11 +3,14 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ItemList from "./ItemList";
 
+//const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://simply-rented-backend.herokuapp.com';
+
 async function getItems(query) {
   try {
     //console.log(query);
     const response = await axios.get(
-      "http://localhost:5000/searchItems?query=" + query
+      API_BASE_URL + "/searchItems?query=" + query
     );
     if (response.status === 200) {
       console.log("RESPONSE");

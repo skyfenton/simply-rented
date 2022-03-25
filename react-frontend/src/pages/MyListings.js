@@ -2,13 +2,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ItemList from "./ItemListOwner";
 
+//const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://simply-rented-backend.herokuapp.com';
+
 async function getItemsByUser(userEmail) {
   const id = {
     email: userEmail,
   };
   try {
     // backend request that finds item by owner
-    const response = await axios.post("http://localhost:5000/listings", id);
+    const response = await axios.post(API_BASE_URL+ "/listings", id);
     //console.log(response);
     if (response.status === 200) {
       return response;
