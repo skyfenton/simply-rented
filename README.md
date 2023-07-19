@@ -1,6 +1,5 @@
 # simply-rented
-
-Web app for renting items you don't use every day. Created by Herculease.
+Web app for renting items you don't use every day. Allows renters to search for their desired item of choice, view a brief description of the item, and then decide if they want to rent. Items can be edited by the owners of the rental as well marked as returned straight from the app! Created by Herculease.
 
 Instructions to run on local machine:
 
