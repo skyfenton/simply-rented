@@ -1,0 +1,17 @@
+#dropdownLogout {
+  color: #dc3545;
+}
+#dropdownLogout:hover {
+  color: white;
+  background-color: #dc3545;
+}
+
+#dropdown-item {
+  color: white;
+  background-color: #dc3545;
+  position: "absolute";
+}
+
+/* .dropdown-menu > li {
+  z-index: 1021;
+} */

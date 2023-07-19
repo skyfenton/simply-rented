@@ -1,0 +1,43 @@
+import axios from "axios";
+import ItemList from "./ItemList";
+
+async function getRentalsByUser(userEmail) {
+  const id = {
+    email: userEmail,
+  };
+  console.log(id);
+  try {
+    const response = await axios.post(process.env.REACT_APP_API_URL + "/rentals", id);
+    console.log(response);
+    if (response.status === 200) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+export function MyRentals(props) {
+  const user = props.getUser();
+
+  return (
+    <div className="container">
+      {user ? (
+        <>
+          <h1 className="pb-3">My Rentals</h1>
+          <div className="row">
+            <ItemList
+              getResponse={getRentalsByUser(user)}
+              error="You currently have no rentals!"
+            />
+          </div>
+        </>
+      ) : (
+        <h2>You're not logged in!</h2>
+      )}
+    </div>
+  );
+}
+
+export default MyRentals;

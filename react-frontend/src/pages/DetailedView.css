@@ -1,0 +1,26 @@
+.article-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.article {
+  flex: 0 0 50%;
+  padding: 10px;
+}
+
+#gradient-bg {
+  min-height: 100vh;
+  background-color: white;
+  background-image: linear-gradient(to bottom, white 80%, #d3a8ed);
+  background-repeat: no-repeat;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
