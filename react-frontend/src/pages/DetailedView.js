@@ -6,12 +6,9 @@ import { useParams } from "react-router-dom";
 // import { rawListeners } from "../../../expressjs-backend/models/user";
 // import { updateItemById } from "../../../expressjs-backend/models/item-services";
 
-// const API_BASE_URL = 'http://localhost:5000';
-const API_BASE_URL = "https://simply-rented-backend.herokuapp.com";
-
 async function getItem(id) {
   try {
-    const response = await axios.get(API_BASE_URL + "/items/" + id);
+    const response = await axios.get(process.env.REACT_APP_API_URL + "/items/" + id);
     return response;
   } catch (error) {
     console.log(error);
@@ -31,7 +28,7 @@ export default function DetailedView(props) {
 
   async function getUser(email) {
     try {
-      const response = await axios.get(API_BASE_URL + "/users/" + email);
+      const response = await axios.get(process.env.REACT_APP_API_URL + "/users/" + email);
       console.log(user);
       return response;
     } catch (error) {
@@ -105,7 +102,7 @@ export default function DetailedView(props) {
     console.log(newItem);
     try {
       const response = await axios.post(
-        API_BASE_URL + "/updateItemById",
+        process.env.REACT_APP_API_URL + "/updateItemById",
         newItem
       );
       console.log(response);

@@ -4,12 +4,9 @@ import logo from "../assets/boxlogo.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-//const API_BASE_URL = 'http://localhost:5000';
-const API_BASE_URL = "https://simply-rented-backend.herokuapp.com";
-
 async function createUser(credentials) {
   try {
-    const response = await axios.post(API_BASE_URL + "/signup", credentials);
+    const response = await axios.post(process.env.REACT_APP_API_URL + "/signup", credentials);
     return response;
   } catch (error) {
     console.log(error);

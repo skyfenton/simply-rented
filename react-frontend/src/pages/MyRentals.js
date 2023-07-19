@@ -1,9 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ItemList from "./ItemList";
-
-//const API_BASE_URL = 'http://localhost:5000';
-const API_BASE_URL = "https://simply-rented-backend.herokuapp.com";
 
 async function getRentalsByUser(userEmail) {
   const id = {
@@ -11,7 +7,7 @@ async function getRentalsByUser(userEmail) {
   };
   console.log(id);
   try {
-    const response = await axios.post(API_BASE_URL + "/rentals", id);
+    const response = await axios.post(process.env.REACT_APP_API_URL + "/rentals", id);
     console.log(response);
     if (response.status === 200) {
       return response;
@@ -23,7 +19,6 @@ async function getRentalsByUser(userEmail) {
 }
 
 export function MyRentals(props) {
-  const navigate = useNavigate();
   const user = props.getUser();
 
   return (

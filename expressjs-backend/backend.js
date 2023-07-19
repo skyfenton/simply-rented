@@ -6,13 +6,14 @@ const userServices = require("./models/user-services");
 const itemServices = require("./models/item-services");
 
 const app = express();
-const port = 5000;
+require("dotenv").config();
+const port = process.env.PORT ?? 5000;
 
 app.use(express.json()); // process in json format
 app.use(cors());
 
-app.listen(process.env.PORT || port, () => {
-  console.log("REST API is listening.");
+app.listen(port, () => {
+  console.log("REST API is listening on port " + port);
 });
 
 // setup get API endpoint to match url pattern '/' (root) and two json objects:

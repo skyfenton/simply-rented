@@ -4,12 +4,9 @@ import DetailedView from "./DetailedView";
 import axios from "axios";
 import "./ItemCard.css";
 
-//const API_BASE_URL = 'http://localhost:5000';
-const API_BASE_URL = "https://simply-rented-backend.herokuapp.com";
-
 async function handleClick(props) {
   try {
-    const response = await axios.get(API_BASE_URL + "/items/" + props.id);
+    const response = await axios.get(process.env.REACT_APP_API_URL + "/items/" + props.id);
     console.log(response);
     return response;
   } catch (error) {
@@ -40,7 +37,7 @@ export default function ItemCard(props) {
     };
     console.log(params);
     try {
-      const response = await axios.post(API_BASE_URL + "/deleteItem", params);
+      const response = await axios.post(process.env.REACT_APP_API_URL + "/deleteItem", params);
       navigate("/listings");
       return response;
     } catch (error) {

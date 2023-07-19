@@ -47,6 +47,7 @@ class App extends Component {
   };
 
   render() {
+    console.log("Base API url: " + process.env.REACT_APP_API_URL)
     const { isAuthenticated } = this.state;
 
     return (
