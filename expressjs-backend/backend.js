@@ -13,7 +13,7 @@ app.use(express.json()); // process in json format
 app.use(cors());
 
 app.listen(port, () => {
-  console.log("REST API is listening on port " + port);
+  console.log(`REST API is listening at http://localhost:${port}`);
 });
 
 // setup get API endpoint to match url pattern '/' (root) and two json objects:
@@ -205,9 +205,3 @@ app.post("/updateItemById", async (req, res) => {
     res.status(500).send("An error occurred in the server.");
   }
 });
-
-// make app listen to requests at port number
-// app.listen(port, () => {
-//   // eslint-disable-next-line no-console
-//   console.log(`Example app listening at http://localhost:${port}`);
-// });
