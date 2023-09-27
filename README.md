@@ -1,6 +1,9 @@
 # Simply Rented
 Web app for renting items you don't use every day. Allows renters to search for their desired item of choice, view a brief description of the item, and then decide if they want to rent. Items can be edited by the owners of the rental as well marked as returned straight from the app! Created by Herculease.
 
+![image](https://github.com/herculease/simply-rented/assets/77299688/5ee73328-7517-4cd3-a636-945fdcd85440)
+![image](https://github.com/herculease/simply-rented/assets/77299688/03de036a-216a-4272-badf-39f7d8f23598)
+
 Instructions to run on local machine:
 
 * Open files, run "npm i" in both react-frontend and expressjs-backend subdirectories via terminal
