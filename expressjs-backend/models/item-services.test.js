@@ -1,4 +1,4 @@
-const myFunctions = require("./item-services.js");
+const myFunctions = require("./item-services");
 
 const testItem = {
   itemName: "jest item",

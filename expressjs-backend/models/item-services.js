@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-require("dotenv").config();
+require('dotenv').config();
 
 const uri = process.env.CONNECTION;
 const conn = mongoose.createConnection(uri);
 
-const ItemModel = conn.model("ItemModel", require("./item"));
+const ItemModel = conn.model('ItemModel', require('./item'));
 
 async function addItem(item) {
   try {
