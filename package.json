@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@babel/eslint-parser": "^7.22.15",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
@@ -8,7 +9,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "nodemon": "^2.0.15",
     "prettier": "^2.5.1"
   },
   "name": "simply-rented",
@@ -16,8 +16,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "IS THIS WHAT IS BEING CALLED"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -28,9 +27,5 @@
   "bugs": {
     "url": "https://github.com/herculease/simply-rented/issues"
   },
-  "homepage": "https://github.com/herculease/simply-rented#readme",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "express": "^4.17.3"
-  }
+  "homepage": "https://github.com/herculease/simply-rented#readme"
 }
