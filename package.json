@@ -12,7 +12,7 @@
     "prettier": "^2.5.1"
   },
   "name": "simply-rented",
-  "description": "Web app for renting items you don't use every day. Created by Herculease.",
+  "description": "Web app for renting items you don't use every day. Created by Herculease, forked by Schuyler Fenton.",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/herculease/simply-rented.git"
+    "url": "git+https://github.com/skyfenton/simply-rented.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/herculease/simply-rented/issues"
+    "url": "https://github.com/skyfenton/simply-rented/issues"
   },
-  "homepage": "https://github.com/herculease/simply-rented#readme"
+  "homepage": "https://github.com/skyfenton/simply-rented#readme"
 }
